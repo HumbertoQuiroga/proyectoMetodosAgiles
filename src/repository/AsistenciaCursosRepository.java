@@ -5,6 +5,8 @@
  */
 package repository;
 
+import org.bson.Document;
+
 /**
  *
  * @author Alfredo Perez
@@ -14,6 +16,18 @@ public class AsistenciaCursosRepository extends BaseRepository{
     public AsistenciaCursosRepository() 
     {
         super("asistenciasCursos");
+    }
+    
+    public Document buscarListaAsistencias(Document curso, String fecha)
+    {
+        if(!curso.isEmpty() && !"".equals(fecha))
+        {
+            Document documento = new Document();
+            documento.append("curso", curso);
+            documento.append("fecha", fecha);
+            return database.getCollection(collectionName).find(documento).first();
+        }
+        return null;
     }
     
 }

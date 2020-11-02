@@ -50,7 +50,9 @@ public class MiRender extends DefaultTableCellRenderer
         
         if(isSelected == true)
         {
-                lable.setBackground(new Color(27,255,255));
+            lable.setBackground(new Color(27,255,255));
+            if(value instanceof String)
+            {
                 String asistencia = (String)value;
                 if(asistencia.equals("Asistio"))
                 {
@@ -63,6 +65,7 @@ public class MiRender extends DefaultTableCellRenderer
                     lable.setBackground(new java.awt.Color(240, 63, 73));
                     lable.setForeground(Color.BLACK);
                 }
+            }       
         }
         
         return lable;

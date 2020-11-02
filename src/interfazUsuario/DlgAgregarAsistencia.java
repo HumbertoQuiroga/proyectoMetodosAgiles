@@ -135,6 +135,11 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
 
         comboBoxCursos.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         comboBoxCursos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar curso" }));
+        comboBoxCursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxCursosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
         panelFondo.setLayout(panelFondoLayout);
@@ -235,8 +240,8 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
           if(comprovarSelectorCurso())
           {
               Document doc = new Document();
-              doc.append("nombreCurso", extraerNombreComboBoxSelectedItem());
-              doc.append("dia", listaContenido.get(0)[0]);
+              doc.append("curso", extraerCurso());
+              doc.append("fecha", convertirFecha(listaContenido.get(0)[0]));
               doc.append("listaAsistencia", obtenerListaContendioJSON());
               if(asistenciaCursosRepository.agregarDoumento(doc))
               {
@@ -251,6 +256,26 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
       else{JOptionPane.showMessageDialog(this, "Error! \n No se ha abierto ningun documento con contenido", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
     }//GEN-LAST:event_botonAceptarActionPerformed
 
+    private Document extraerCurso()
+    {
+        String[] curso;
+        Document documentoCurso = new Document();
+        curso = comboBoxCursos.getSelectedItem().toString().split(",");
+        documentoCurso.append("nombre", curso[0].substring(curso[0].indexOf(":")+2, curso[0].length()));
+        documentoCurso.append("periodo", curso[1].substring(curso[1].indexOf(":")+2, curso[1].length()));
+        documentoCurso.append("dias", curso[2].substring(curso[2].indexOf(":")+2, curso[2].length()));
+        documentoCurso.append("hora", curso[3].substring(curso[3].indexOf(":")+2, curso[3].length()));
+        return documentoCurso;
+    }
+    
+    private String convertirFecha(String fecha)
+    {
+        String[] arregloFecha;
+        //Dia[2]/Mes[1]/Año[0]
+        arregloFecha = fecha.split("-");
+        return arregloFecha[2]+"/"+arregloFecha[1]+"/"+arregloFecha[0];
+    }
+    
     private List<Document> obtenerListaContendioJSON()
     {
         List<Document> listaContenidoJSON = new ArrayList<>();
@@ -258,9 +283,9 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         {
            Document documento = new Document();
            documento.append("nombre", listaContenido.get(cont)[0]);
-           documento.append("EstadoAsistencia", listaContenido.get(cont)[1]);
-           documento.append("HoraEntrada", listaContenido.get(cont)[2]);
-           documento.append("MinutosTotales", listaContenido.get(cont)[3]);
+           documento.append("estadoAsistencia", listaContenido.get(cont)[1]);
+           documento.append("horaEntrada", listaContenido.get(cont)[2]);
+           documento.append("minutosTotales", listaContenido.get(cont)[3]);
            listaContenidoJSON.add(documento);
         }
         return listaContenidoJSON;
@@ -271,10 +296,6 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         return !comboBoxCursos.getSelectedItem().equals("Seleccionar curso");
     }
     
-    private String extraerNombreComboBoxSelectedItem()
-    {
-        return comboBoxCursos.getSelectedItem().toString().substring(comboBoxCursos.getSelectedItem().toString().indexOf(":")+2, comboBoxCursos.getSelectedItem().toString().indexOf(","));
-    }
     
     private void txtSelectorArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSelectorArchivoActionPerformed
         interpreteArchivo = new Interpreter();
@@ -285,6 +306,10 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         }
         else{JOptionPane.showMessageDialog(this, "Error \n No se pudo importar el archivo.", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
     }//GEN-LAST:event_txtSelectorArchivoActionPerformed
+
+    private void comboBoxCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxCursosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxCursosActionPerformed
 
     private boolean comprobarArchivo(String nombreArchivo)
     {
