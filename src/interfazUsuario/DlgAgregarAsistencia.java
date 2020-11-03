@@ -71,6 +71,8 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         tablaLista = new javax.swing.JTable();
         etiquetaSeleccionarCurso = new javax.swing.JLabel();
         comboBoxCursos = new javax.swing.JComboBox<>();
+        etiquetaFecha = new javax.swing.JLabel();
+        txtFecha = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -141,6 +143,11 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
             }
         });
 
+        etiquetaFecha.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        etiquetaFecha.setText("Fecha: ");
+
+        txtFecha.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
         panelFondo.setLayout(panelFondoLayout);
         panelFondoLayout.setHorizontalGroup(
@@ -161,15 +168,22 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
                                 .addComponent(botonCanelar)))
                         .addGap(35, 35, 35))
                     .addGroup(panelFondoLayout.createSequentialGroup()
-                        .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(etiquetaSeleccionarCurso)
-                            .addComponent(etiquetaSeleccionarArchivo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtSelectorArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
-                            .addComponent(comboBoxCursos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botonBuscarArchivo)
+                        .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelFondoLayout.createSequentialGroup()
+                                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(etiquetaSeleccionarArchivo)
+                                    .addComponent(etiquetaSeleccionarCurso))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtSelectorArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+                                    .addComponent(comboBoxCursos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botonBuscarArchivo))
+                            .addGroup(panelFondoLayout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(etiquetaFecha)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panelFondoLayout.setVerticalGroup(
@@ -186,13 +200,19 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etiquetaSeleccionarCurso)
                     .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                    .addGroup(panelFondoLayout.createSequentialGroup()
+                        .addGap(0, 4, Short.MAX_VALUE)
+                        .addComponent(etiquetaFecha)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollPanelTablaLista, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonCanelar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -221,6 +241,7 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
                 if(listaContenido != null)
                 {
                     txtSelectorArchivo.setText(archivo.getPath());
+                    txtFecha.setText(convertirFecha(listaContenido.get(0)[0]));
                     actualizarTablaLista();
                 }
                 else{JOptionPane.showMessageDialog(this, "Error! \n No se pudo importar el archivo.", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
@@ -243,19 +264,28 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
               doc.append("curso", extraerCurso());
               doc.append("fecha", convertirFecha(listaContenido.get(0)[0]));
               doc.append("listaAsistencia", obtenerListaContendioJSON());
-              if(asistenciaCursosRepository.agregarDoumento(doc))
-              {
-                  JOptionPane.showMessageDialog(this, "La asistencia se agrego con exito!", "Mesaje Aviso", JOptionPane.INFORMATION_MESSAGE);
-                  dispose();
-                  framePrincipal.setVisible(true);
-              }
-              else{JOptionPane.showMessageDialog(this, "Error! \n No se pudo agregar la asistencia!", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
-          }
+             if(comprobarSiElRegistroExiste(extraerCurso(), convertirFecha(listaContenido.get(0)[0])))
+             {
+                if(asistenciaCursosRepository.agregarDoumento(doc))
+                {
+                    JOptionPane.showMessageDialog(this, "La asistencia se agrego con exito!", "Mesaje Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    dispose();
+                    framePrincipal.setVisible(true);
+                }
+                else{JOptionPane.showMessageDialog(this, "Error! \n No se pudo agregar la asistencia!", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+             }
+             else{JOptionPane.showMessageDialog(this, "Error! \n Ya hay un registro en la fecha:"+convertirFecha(listaContenido.get(0)[0])+"\n para el curso seleccionado!", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+           }
           else{JOptionPane.showMessageDialog(this, "Error! \n No se ha seleccionado ningun curso", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
       }
       else{JOptionPane.showMessageDialog(this, "Error! \n No se ha abierto ningun documento con contenido", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
     }//GEN-LAST:event_botonAceptarActionPerformed
 
+    private boolean comprobarSiElRegistroExiste(Document documento, String fecha)
+    {
+        return asistenciaCursosRepository.buscarListaAsistencias(documento, fecha) == null;
+    }
+    
     private Document extraerCurso()
     {
         String[] curso;
@@ -396,12 +426,14 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
     private javax.swing.JButton botonBuscarArchivo;
     private javax.swing.JButton botonCanelar;
     private javax.swing.JComboBox<String> comboBoxCursos;
+    private javax.swing.JLabel etiquetaFecha;
     private javax.swing.JLabel etiquetaSeleccionarArchivo;
     private javax.swing.JLabel etiquetaSeleccionarCurso;
     private javax.swing.JLabel etiquetaTitulo;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JScrollPane scrollPanelTablaLista;
     private javax.swing.JTable tablaLista;
+    private javax.swing.JLabel txtFecha;
     private javax.swing.JTextField txtSelectorArchivo;
     // End of variables declaration//GEN-END:variables
 

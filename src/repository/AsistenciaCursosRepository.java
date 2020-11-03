@@ -25,7 +25,9 @@ public class AsistenciaCursosRepository extends BaseRepository{
             Document documento = new Document();
             documento.append("curso", curso);
             documento.append("fecha", fecha);
-            return database.getCollection(collectionName).find(documento).first();
+            Document documentoEncontrado = database.getCollection(collectionName).find(documento).first();
+            if(documentoEncontrado==null){return null;}
+            else{return documentoEncontrado;}
         }
         return null;
     }

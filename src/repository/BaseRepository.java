@@ -19,7 +19,7 @@ public abstract class BaseRepository
     {
        this.database = mongoClient.getDatabase("cursosDB");
        this.collectionName = collectionName;
-       System.out.println("Base Datos:"+collectionName); 
+       //System.out.println("Base Datos:"+collectionName); 
     }
     
     
