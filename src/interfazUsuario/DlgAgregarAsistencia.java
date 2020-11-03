@@ -48,6 +48,7 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         this.actualizarTablaLista();
         this.framePrincipal = parent;
         this.tablaLista.setDefaultRenderer(tablaLista.getColumnClass(1) ,mirender);
+        this.setTitle("Menu agregar asistencia");
         this.setVisible(true);
     }
 
@@ -116,7 +117,7 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         });
 
         etiquetaTitulo.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        etiquetaTitulo.setText("Agregar Asistencia");
+        etiquetaTitulo.setText("Agregar asistencia");
 
         tablaLista.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         tablaLista.setModel(new javax.swing.table.DefaultTableModel(
@@ -243,10 +244,8 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
                     txtSelectorArchivo.setText(archivo.getPath());
                     txtFecha.setText(convertirFecha(listaContenido.get(0)[0]));
                     actualizarTablaLista();
-                }
-                else{JOptionPane.showMessageDialog(this, "Error! \n No se pudo importar el archivo.", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
-            }
-            else{JOptionPane.showMessageDialog(this, "Error! \n El tipo de archivo es incorrecto. \n Favor de solo ingresar archivos con la extencion \".CSV\" ", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+                }else{JOptionPane.showMessageDialog(this, "Error! \n No se pudo importar el archivo.", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+            }else{JOptionPane.showMessageDialog(this, "Error! \n El tipo de archivo es incorrecto. \n Favor de solo ingresar archivos con la extencion \".CSV\" ", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
         }
     }//GEN-LAST:event_botonBuscarArchivoActionPerformed
 
@@ -271,14 +270,10 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
                     JOptionPane.showMessageDialog(this, "La asistencia se agrego con exito!", "Mesaje Aviso", JOptionPane.INFORMATION_MESSAGE);
                     dispose();
                     framePrincipal.setVisible(true);
-                }
-                else{JOptionPane.showMessageDialog(this, "Error! \n No se pudo agregar la asistencia!", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
-             }
-             else{JOptionPane.showMessageDialog(this, "Error! \n Ya hay un registro en la fecha:"+convertirFecha(listaContenido.get(0)[0])+"\n para el curso seleccionado!", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
-           }
-          else{JOptionPane.showMessageDialog(this, "Error! \n No se ha seleccionado ningun curso", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
-      }
-      else{JOptionPane.showMessageDialog(this, "Error! \n No se ha abierto ningun documento con contenido", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+                }else{JOptionPane.showMessageDialog(this, "Error! \n No se pudo agregar la asistencia!", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+             }else{JOptionPane.showMessageDialog(this, "Error! \n Ya hay un registro en la fecha:"+convertirFecha(listaContenido.get(0)[0])+"\n para el curso seleccionado!", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+           }else{JOptionPane.showMessageDialog(this, "Error! \n No se ha seleccionado ningun curso", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+      }else{JOptionPane.showMessageDialog(this, "Error! \n No se ha abierto ningun documento con contenido", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     private boolean comprobarSiElRegistroExiste(Document documento, String fecha)
@@ -348,23 +343,15 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
     
     private Object[][] comprobarLista()
     {
-        if(listaContenido.isEmpty())
-        {
-            return new Object[0][0];
-        }
-        else
-        {
-            return interpreteArchivo.getConteridoTabla(listaContenido);
-        }
+        if(listaContenido.isEmpty()) {return new Object[0][0];}
+        else{return interpreteArchivo.getConteridoTabla(listaContenido);}
     }
     
     private void actualizarTablaLista()
     {
        tablaLista.setModel(new javax.swing.table.DefaultTableModel(
             comprobarLista(),
-            new String [] {
-                "Num.","Nombre Completo", "Estado asistencia", "Hora entrada", "Minutos totales"
-            }
+            new String []{"Num.","Nombre Completo", "Estado asistencia", "Hora entrada", "Minutos totales"}
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class,java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
@@ -404,8 +391,7 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         {
             File archivo = selectorArchivos.getSelectedFile();
             return archivo;
-        }
-        else{return null;}
+        }else{return null;}
     }
     
     private void llenarComboBoxCursos()

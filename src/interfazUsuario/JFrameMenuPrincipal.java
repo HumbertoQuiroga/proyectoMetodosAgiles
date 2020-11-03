@@ -41,18 +41,21 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
         cajaAgregarAsistencia = new javax.swing.JPanel();
         etiquetaAgregarAsistencia = new javax.swing.JLabel();
         botonAgregarAsistencia = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         cajaMostrarListaAsistencias = new javax.swing.JPanel();
         etiquetaMostrarListasAsistencias = new javax.swing.JLabel();
         botonMostrarListasAsistencias = new javax.swing.JButton();
+        cajaSalir = new javax.swing.JPanel();
+        botonSalir = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Principal");
         setResizable(false);
 
         panelFondo.setBackground(new java.awt.Color(240, 202, 171));
-        panelFondo.setBorder(new javax.swing.border.MatteBorder(null));
-        panelFondo.setPreferredSize(new java.awt.Dimension(605, 605));
+        panelFondo.setPreferredSize(new java.awt.Dimension(800, 486));
 
         cajaAgregarCurso.setBackground(new java.awt.Color(202, 7, 54));
         cajaAgregarCurso.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -68,6 +71,7 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
         botonAgregarCurso.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonAgregarCurso.setFocusPainted(false);
         botonAgregarCurso.setMargin(null);
+        botonAgregarCurso.setPreferredSize(new java.awt.Dimension(240, 80));
         botonAgregarCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAgregarCursoActionPerformed(evt);
@@ -84,13 +88,13 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cajaAgregarCursoLayout.createSequentialGroup()
                 .addComponent(etiquetaAgragarCursos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonAgregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(botonAgregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         cajaAgregarCursoLayout.setVerticalGroup(
             cajaAgregarCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cajaAgregarCursoLayout.createSequentialGroup()
                 .addGroup(cajaAgregarCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonAgregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonAgregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(etiquetaAgragarCursos))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -110,6 +114,7 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
         botonMostrarCurso.setContentAreaFilled(false);
         botonMostrarCurso.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonMostrarCurso.setFocusPainted(false);
+        botonMostrarCurso.setPreferredSize(new java.awt.Dimension(240, 80));
         botonMostrarCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonMostrarCursoActionPerformed(evt);
@@ -151,6 +156,7 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
         botonAgregarAsistencia.setContentAreaFilled(false);
         botonAgregarAsistencia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonAgregarAsistencia.setFocusPainted(false);
+        botonAgregarAsistencia.setPreferredSize(new java.awt.Dimension(240, 80));
         botonAgregarAsistencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAgregarAsistenciaActionPerformed(evt);
@@ -164,7 +170,7 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
             .addGroup(cajaAgregarAsistenciaLayout.createSequentialGroup()
                 .addComponent(etiquetaAgregarAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonAgregarAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonAgregarAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(75, 75, 75))
         );
         cajaAgregarAsistenciaLayout.setVerticalGroup(
@@ -172,30 +178,21 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
             .addGroup(cajaAgregarAsistenciaLayout.createSequentialGroup()
                 .addGroup(cajaAgregarAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(etiquetaAgregarAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonAgregarAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonAgregarAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton1.setText("Salir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         cajaMostrarListaAsistencias.setBackground(new java.awt.Color(255, 108, 146));
         cajaMostrarListaAsistencias.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         cajaMostrarListaAsistencias.setPreferredSize(new java.awt.Dimension(326, 82));
 
         etiquetaMostrarListasAsistencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mostrarLista-icono.png"))); // NOI18N
-        etiquetaMostrarListasAsistencias.setPreferredSize(new java.awt.Dimension(80, 80));
 
-        botonMostrarListasAsistencias.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        botonMostrarListasAsistencias.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
         botonMostrarListasAsistencias.setForeground(new java.awt.Color(255, 255, 255));
         botonMostrarListasAsistencias.setText("Mostrar Asistencias");
         botonMostrarListasAsistencias.setContentAreaFilled(false);
-        botonMostrarListasAsistencias.setPreferredSize(new java.awt.Dimension(209, 37));
+        botonMostrarListasAsistencias.setPreferredSize(new java.awt.Dimension(240, 80));
         botonMostrarListasAsistencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonMostrarListasAsistenciasActionPerformed(evt);
@@ -207,9 +204,10 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
         cajaMostrarListaAsistenciasLayout.setHorizontalGroup(
             cajaMostrarListaAsistenciasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cajaMostrarListaAsistenciasLayout.createSequentialGroup()
-                .addComponent(etiquetaMostrarListasAsistencias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(etiquetaMostrarListasAsistencias)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botonMostrarListasAsistencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(botonMostrarListasAsistencias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         cajaMostrarListaAsistenciasLayout.setVerticalGroup(
             cajaMostrarListaAsistenciasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,6 +218,72 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
                 .addGap(5, 5, 5))
         );
 
+        cajaSalir.setBackground(new java.awt.Color(0, 0, 0));
+
+        botonSalir.setBackground(new java.awt.Color(255, 255, 153));
+        botonSalir.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        botonSalir.setForeground(new java.awt.Color(255, 255, 255));
+        botonSalir.setText("Salir");
+        botonSalir.setContentAreaFilled(false);
+        botonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSalirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout cajaSalirLayout = new javax.swing.GroupLayout(cajaSalir);
+        cajaSalir.setLayout(cajaSalirLayout);
+        cajaSalirLayout.setHorizontalGroup(
+            cajaSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cajaSalirLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        cajaSalirLayout.setVerticalGroup(
+            cajaSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cajaSalirLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonSalir))
+        );
+
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setPreferredSize(new java.awt.Dimension(326, 82));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/modificarLista-icono2.png"))); // NOI18N
+        jLabel1.setPreferredSize(new java.awt.Dimension(80, 80));
+
+        jButton1.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Modificar Asistencias");
+        jButton1.setContentAreaFilled(false);
+        jButton1.setPreferredSize(new java.awt.Dimension(240, 80));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
         panelFondo.setLayout(panelFondoLayout);
         panelFondoLayout.setHorizontalGroup(
@@ -227,28 +291,29 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
             .addGroup(panelFondoLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelFondoLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelFondoLayout.createSequentialGroup()
+                        .addComponent(etiquetaTitulo)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondoLayout.createSequentialGroup()
                         .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cajaAgregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cajaAgregarAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 37, Short.MAX_VALUE)
-                        .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cajaMostrarCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
-                            .addComponent(cajaMostrarListaAsistencias, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE))
-                        .addGap(45, 45, 45))
-                    .addGroup(panelFondoLayout.createSequentialGroup()
+                        .addGap(18, 58, Short.MAX_VALUE)
                         .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelFondoLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton1))
-                            .addGroup(panelFondoLayout.createSequentialGroup()
-                                .addComponent(etiquetaTitulo)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                            .addComponent(cajaMostrarListaAsistencias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cajaMostrarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(45, 45, 45))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cajaSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         panelFondoLayout.setVerticalGroup(
             panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFondoLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondoLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(etiquetaTitulo)
                 .addGap(18, 18, Short.MAX_VALUE)
@@ -257,26 +322,24 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
                     .addComponent(cajaMostrarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cajaAgregarAsistencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cajaMostrarListaAsistencias, javax.swing.GroupLayout.PREFERRED_SIZE, 82, Short.MAX_VALUE))
-                .addGap(90, 90, 90)
-                .addComponent(jButton1)
-                .addGap(229, 229, 229))
+                    .addComponent(cajaAgregarAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cajaMostrarListaAsistencias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(cajaSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(panelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 486, Short.MAX_VALUE)
         );
 
         panelFondo.getAccessibleContext().setAccessibleDescription("");
@@ -300,13 +363,17 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
         DlgAgregarAsistencia agregarAsistencia = new DlgAgregarAsistencia(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo);
     }//GEN-LAST:event_botonAgregarAsistenciaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonSalirActionPerformed
 
     private void botonMostrarListasAsistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarListasAsistenciasActionPerformed
         DlgMostrarListasAsistencias mostrarListaAsistencias = new DlgMostrarListasAsistencias(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo);
     }//GEN-LAST:event_botonMostrarListasAsistenciasActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,16 +416,20 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton botonAgregarCurso;
     private javax.swing.JButton botonMostrarCurso;
     private javax.swing.JButton botonMostrarListasAsistencias;
+    private javax.swing.JButton botonSalir;
     private javax.swing.JPanel cajaAgregarAsistencia;
     private javax.swing.JPanel cajaAgregarCurso;
     private javax.swing.JPanel cajaMostrarCurso;
     private javax.swing.JPanel cajaMostrarListaAsistencias;
+    private javax.swing.JPanel cajaSalir;
     private javax.swing.JLabel etiquetaAgragarCursos;
     private javax.swing.JLabel etiquetaAgregarAsistencia;
     private javax.swing.JLabel etiquetaMostrarCurso;
     private javax.swing.JLabel etiquetaMostrarListasAsistencias;
     private javax.swing.JLabel etiquetaTitulo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelFondo;
     // End of variables declaration//GEN-END:variables
 }

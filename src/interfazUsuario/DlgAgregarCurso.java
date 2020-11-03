@@ -32,6 +32,7 @@ public class DlgAgregarCurso extends javax.swing.JDialog
         this.initComponents();
         this.cursosRepo = cursosRepo;
         this.framePrincipal = parent;
+        this.setTitle("Menu agregar curso");
         this.setVisible(true);
     }
 
@@ -91,6 +92,7 @@ public class DlgAgregarCurso extends javax.swing.JDialog
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtHora.setText("");
 
         botonAgregarCurso.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         botonAgregarCurso.setText("Agregar");
@@ -298,27 +300,25 @@ public class DlgAgregarCurso extends javax.swing.JDialog
         hora = validarHora(txtHora.getText());
           if((!"".equals(txtNombre.getText())))
           {  
-            if(!txtDias.getText().equals(""))
-            {
-              if(!"null".equals(hora))
-              {
-                    Document documento = new Document();
-                    documento.append("nombre", txtNombre.getText());
-                    documento.append("periodo", comboPeriodo.getSelectedItem().toString());
-                    documento.append("dias", txtDias.getText());
-                    documento.append("hora", hora);
-                    if(comprobarSiElCursoExiste(documento)!=true)
-                    {
-                        cursosRepo.agregarDoumento(documento);
-                        JOptionPane.showMessageDialog(this, "El curso se agrego correctamente!", "Mensaje Aviso", JOptionPane.INFORMATION_MESSAGE);
-                        dispose();
-                        framePrincipal.setVisible(true);
-                    }
-                    else{JOptionPane.showMessageDialog(this, "Error! \n Este curso ya fue registrado", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
-              } else{JOptionPane.showMessageDialog(this, "Error! \n El campo hora no puede estar vacio", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
-            } else{JOptionPane.showMessageDialog(this, "Error! \n No hay dias seleccionados", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
-            
-          } else{JOptionPane.showMessageDialog(this, "Error! \n El campo nombre no puede estar vacio", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+                if(!txtDias.getText().equals(""))
+                {
+                  if(hora != null)
+                  {
+                        Document documento = new Document();
+                        documento.append("nombre", txtNombre.getText());
+                        documento.append("periodo", comboPeriodo.getSelectedItem().toString());
+                        documento.append("dias", txtDias.getText());
+                        documento.append("hora", hora);
+                        if(comprobarSiElCursoExiste(documento)!=true)
+                        {
+                            cursosRepo.agregarDoumento(documento);
+                            JOptionPane.showMessageDialog(this, "El curso se agrego correctamente!", "Mensaje Aviso", JOptionPane.INFORMATION_MESSAGE);
+                            dispose();
+                            framePrincipal.setVisible(true);
+                        }else{JOptionPane.showMessageDialog(this, "Error! \n Este curso ya fue registrado", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+                  }else{JOptionPane.showMessageDialog(this, "Error! \n El campo hora es incorrecto", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+                }else{JOptionPane.showMessageDialog(this, "Error! \n No hay dias seleccionados", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+           }else{JOptionPane.showMessageDialog(this, "Error! \n El campo nombre no puede estar vacio", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
     }//GEN-LAST:event_botonAgregarCursoActionPerformed
 
     private boolean comprobarSiElCursoExiste(Document documento)
@@ -369,7 +369,8 @@ public class DlgAgregarCurso extends javax.swing.JDialog
         
         if((hora[0].equals("  ")) || (hora[1].equals("  ")))
         {
-            return "null";
+            txtHora.setText("");
+            return null;
         }
         
         if(((Integer.valueOf(hora[0])>=0) && (Integer.valueOf(hora[0])<25))&&
@@ -377,6 +378,7 @@ public class DlgAgregarCurso extends javax.swing.JDialog
         {
             return hora[0]+":"+hora[1];
         }
+        txtHora.setText("");
         return null;
     }
     

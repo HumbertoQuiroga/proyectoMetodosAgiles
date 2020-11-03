@@ -41,7 +41,8 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
         this.listaContenido = new ArrayList<>();
         this.actualizarTablaLista();
         this.tablaLista.setDefaultRenderer(tablaLista.getColumnClass(1) ,mirender);
-        setVisible(true);
+        this.setTitle("Menu mostrar lista asistencias");
+        this.setVisible(true);
     }
 
     /**
@@ -164,11 +165,11 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
         );
 
         pack();

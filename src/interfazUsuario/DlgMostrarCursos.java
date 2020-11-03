@@ -31,6 +31,7 @@ public class DlgMostrarCursos extends javax.swing.JDialog
         this.cursosRepo = cursosRepo;
         this.initComponents();
         this.actualizarTablaCursos();
+        this.setTitle("Menu mostrar cursos");
         this.setVisible(true);
     }
 
@@ -131,25 +132,19 @@ public class DlgMostrarCursos extends javax.swing.JDialog
         
         tablaCursos.setModel(new javax.swing.table.DefaultTableModel(
                 setObjetosTablaCursos(cursos),
-            new String [] {
-                "Nombre Curso", "Periodo", "Dias", "Hora"
-            }
+            new String [] {"Nombre Curso", "Periodo", "Dias", "Hora"}
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
                 
             @Override
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+            public Class getColumnClass(int columnIndex) {return types [columnIndex];}
             
             boolean[] canEdit = new boolean [] {false, false, false, false};
 
             @Override
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
+            public boolean isCellEditable(int rowIndex, int columnIndex) {return canEdit [columnIndex];}
         }); 
        
         if (tablaCursos.getColumnModel().getColumnCount() < 8) 
