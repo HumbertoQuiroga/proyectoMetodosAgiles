@@ -16,7 +16,6 @@ import repository.CursosRepository;
 public class DlgMostrarCursos extends javax.swing.JDialog 
 {
     private CursosRepository cursosRepo;
-    private java.awt.Frame framePrincipal;
     
     /**
      * Creates new form DlgMostrarCursos
@@ -27,7 +26,6 @@ public class DlgMostrarCursos extends javax.swing.JDialog
     public DlgMostrarCursos(java.awt.Frame parent, boolean modal, CursosRepository cursosRepo) 
     {
         super(parent, modal);
-        this.framePrincipal = parent;
         this.cursosRepo = cursosRepo;
         this.initComponents();
         this.actualizarTablaCursos();
@@ -123,7 +121,6 @@ public class DlgMostrarCursos extends javax.swing.JDialog
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         dispose();
-        framePrincipal.setVisible(true);
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     private void actualizarTablaCursos()

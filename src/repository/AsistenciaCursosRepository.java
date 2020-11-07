@@ -5,7 +5,13 @@
  */
 package repository;
 
+import com.mongodb.CommandResult;
+import com.mongodb.client.model.FindOneAndUpdateOptions;
+import com.mongodb.client.model.UpdateOptions;
+import com.mongodb.client.result.UpdateResult;
+import java.util.List;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 /**
  *
@@ -30,6 +36,17 @@ public class AsistenciaCursosRepository extends BaseRepository{
             else{return documentoEncontrado;}
         }
         return null;
+    }
+    
+    public void actualizarListaAsistencias(Document curso, String fecha, List<Document> listaActualizada)
+    {
+        Document listaAsistenciasBuscada = buscarListaAsistencias(curso, fecha);
+        if(listaAsistenciasBuscada != null)
+        {
+            Bson valorListaAcualizada = new Document("listaAsistencia", listaActualizada);
+            Bson operacionActualizar = new Document("$set",valorListaAcualizada);
+            database.getCollection(collectionName).updateOne(listaAsistenciasBuscada, operacionActualizar);
+        }
     }
     
 }

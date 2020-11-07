@@ -23,9 +23,8 @@ import repository.CursosRepository;
  */
 public class DlgAgregarAsistencia extends javax.swing.JDialog 
 {
-    private Interpreter interpreteArchivo;
+    private Interpreter interpreteArchivo = new Interpreter();;
     private List<String[]> listaContenido;
-    private java.awt.Frame framePrincipal;
     private MiRender mirender = new MiRender();
     private AsistenciaCursosRepository asistenciaCursosRepository;
     private CursosRepository cursosRepo;
@@ -46,7 +45,6 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         this.llenarComboBoxCursos();
         this.listaContenido = new ArrayList<>();
         this.actualizarTablaLista();
-        this.framePrincipal = parent;
         this.tablaLista.setDefaultRenderer(tablaLista.getColumnClass(1) ,mirender);
         this.setTitle("Menu agregar asistencia");
         this.setVisible(true);
@@ -84,9 +82,9 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         txtSelectorArchivo.setEditable(false);
         txtSelectorArchivo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         txtSelectorArchivo.setRequestFocusEnabled(false);
-        txtSelectorArchivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSelectorArchivoActionPerformed(evt);
+        txtSelectorArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtSelectorArchivoMousePressed(evt);
             }
         });
 
@@ -138,11 +136,6 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
 
         comboBoxCursos.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         comboBoxCursos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar curso" }));
-        comboBoxCursos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxCursosActionPerformed(evt);
-            }
-        });
 
         etiquetaFecha.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         etiquetaFecha.setText("Fecha: ");
@@ -201,11 +194,11 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etiquetaSeleccionarCurso)
                     .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                    .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                     .addGroup(panelFondoLayout.createSequentialGroup()
-                        .addGap(0, 4, Short.MAX_VALUE)
+                        .addGap(0, 7, Short.MAX_VALUE)
                         .addComponent(etiquetaFecha)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollPanelTablaLista, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -213,7 +206,7 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonCanelar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -232,8 +225,7 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonBuscarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarArchivoActionPerformed
-        interpreteArchivo = new Interpreter();
-        File archivo = seleccionarArchivo();
+       File archivo = seleccionarArchivo();
         if(archivo!=null)
         {
             if(comprobarArchivo(archivo.getName()))
@@ -251,30 +243,57 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
 
     private void botonCanelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCanelarActionPerformed
         dispose();
-        framePrincipal.setVisible(true);
     }//GEN-LAST:event_botonCanelarActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-      if(!listaContenido.isEmpty())
-      {
-          if(comprovarSelectorCurso())
-          {
-              Document doc = new Document();
-              doc.append("curso", extraerCurso());
-              doc.append("fecha", convertirFecha(listaContenido.get(0)[0]));
-              doc.append("listaAsistencia", obtenerListaContendioJSON());
+        if(validarCampos())
+        {   
+             Document doc = new Document();
+             doc.append("curso", extraerCurso());
+             doc.append("fecha", convertirFecha(listaContenido.get(0)[0]));
+             doc.append("listaAsistencia", obtenerListaContendioJSON());
              if(comprobarSiElRegistroExiste(extraerCurso(), convertirFecha(listaContenido.get(0)[0])))
              {
                 if(asistenciaCursosRepository.agregarDoumento(doc))
                 {
                     JOptionPane.showMessageDialog(this, "La asistencia se agrego con exito!", "Mesaje Aviso", JOptionPane.INFORMATION_MESSAGE);
                     dispose();
-                    framePrincipal.setVisible(true);
                 }else{JOptionPane.showMessageDialog(this, "Error! \n No se pudo agregar la asistencia!", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
              }else{JOptionPane.showMessageDialog(this, "Error! \n Ya hay un registro en la fecha:"+convertirFecha(listaContenido.get(0)[0])+"\n para el curso seleccionado!", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
-           }else{JOptionPane.showMessageDialog(this, "Error! \n No se ha seleccionado ningun curso", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
-      }else{JOptionPane.showMessageDialog(this, "Error! \n No se ha abierto ningun documento con contenido", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+        }
     }//GEN-LAST:event_botonAceptarActionPerformed
+
+    private boolean validarCampos()
+    {
+       if(listaContenido.isEmpty())
+       {
+           JOptionPane.showMessageDialog(this, "Error! \n No se ha abierto ningun documento con contenido", "Mensaje Error", JOptionPane.ERROR_MESSAGE);
+           return false;
+       }
+        else if(!comprovarSelectorCurso())
+       {
+           JOptionPane.showMessageDialog(this, "Error! \n No se ha seleccionado ningun curso", "Mensaje Error", JOptionPane.ERROR_MESSAGE);
+           return false;
+       }
+       return true;    
+    }
+    
+    private void txtSelectorArchivoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSelectorArchivoMousePressed
+        File archivo = seleccionarArchivo();
+        if(archivo!=null)
+        {
+            if(comprobarArchivo(archivo.getName()))
+            {
+                listaContenido = interpreteArchivo.importarArchivo(archivo);
+                if(listaContenido != null)
+                {
+                    txtSelectorArchivo.setText(archivo.getPath());
+                    txtFecha.setText(convertirFecha(listaContenido.get(0)[0]));
+                    actualizarTablaLista();
+                }else{JOptionPane.showMessageDialog(this, "Error! \n No se pudo importar el archivo.", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+            }else{JOptionPane.showMessageDialog(this, "Error! \n El tipo de archivo es incorrecto. \n Favor de solo ingresar archivos con la extencion \".CSV\" ", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+        }
+    }//GEN-LAST:event_txtSelectorArchivoMousePressed
 
     private boolean comprobarSiElRegistroExiste(Document documento, String fecha)
     {
@@ -322,20 +341,6 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
     }
     
     
-    private void txtSelectorArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSelectorArchivoActionPerformed
-        interpreteArchivo = new Interpreter();
-        listaContenido = interpreteArchivo.importarArchivo(seleccionarArchivo());
-        if(listaContenido != null)
-        {
-            actualizarTablaLista();
-        }
-        else{JOptionPane.showMessageDialog(this, "Error \n No se pudo importar el archivo.", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
-    }//GEN-LAST:event_txtSelectorArchivoActionPerformed
-
-    private void comboBoxCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxCursosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxCursosActionPerformed
-
     private boolean comprobarArchivo(String nombreArchivo)
     {
         return nombreArchivo.substring(nombreArchivo.indexOf("."), nombreArchivo.length()).equals(".csv");

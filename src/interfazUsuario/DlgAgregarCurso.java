@@ -18,7 +18,6 @@ public class DlgAgregarCurso extends javax.swing.JDialog
     private String[] dias = new String[7];
     private String nombreDias;
     private CursosRepository cursosRepo;
-    private java.awt.Frame framePrincipal;
     
     /**
      * Creates new form DlgAgregarCurso
@@ -31,7 +30,6 @@ public class DlgAgregarCurso extends javax.swing.JDialog
         super(parent, modal);
         this.initComponents();
         this.cursosRepo = cursosRepo;
-        this.framePrincipal = parent;
         this.setTitle("Menu agregar curso");
         this.setVisible(true);
     }
@@ -296,31 +294,45 @@ public class DlgAgregarCurso extends javax.swing.JDialog
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarCursoActionPerformed
-        String hora;
-        hora = validarHora(txtHora.getText());
-          if((!"".equals(txtNombre.getText())))
-          {  
-                if(!txtDias.getText().equals(""))
-                {
-                  if(hora != null)
-                  {
-                        Document documento = new Document();
-                        documento.append("nombre", txtNombre.getText());
-                        documento.append("periodo", comboPeriodo.getSelectedItem().toString());
-                        documento.append("dias", txtDias.getText());
-                        documento.append("hora", hora);
-                        if(comprobarSiElCursoExiste(documento)!=true)
-                        {
-                            cursosRepo.agregarDoumento(documento);
-                            JOptionPane.showMessageDialog(this, "El curso se agrego correctamente!", "Mensaje Aviso", JOptionPane.INFORMATION_MESSAGE);
-                            dispose();
-                            framePrincipal.setVisible(true);
-                        }else{JOptionPane.showMessageDialog(this, "Error! \n Este curso ya fue registrado", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
-                  }else{JOptionPane.showMessageDialog(this, "Error! \n El campo hora es incorrecto", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
-                }else{JOptionPane.showMessageDialog(this, "Error! \n No hay dias seleccionados", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
-           }else{JOptionPane.showMessageDialog(this, "Error! \n El campo nombre no puede estar vacio", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+        if(validarCampos())
+        {
+              Document documento = new Document();
+              documento.append("nombre", txtNombre.getText());
+              documento.append("periodo", comboPeriodo.getSelectedItem().toString());
+              documento.append("dias", txtDias.getText());
+              documento.append("hora", validarHora(txtHora.getText()));
+              if(comprobarSiElCursoExiste(documento)!=true)
+              {
+                  cursosRepo.agregarDoumento(documento);
+                  JOptionPane.showMessageDialog(this, "El curso se agrego correctamente!", "Mensaje Aviso", JOptionPane.INFORMATION_MESSAGE);
+                  dispose();
+              }else{JOptionPane.showMessageDialog(this, "Error! \n Este curso ya fue registrado", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+        }
     }//GEN-LAST:event_botonAgregarCursoActionPerformed
 
+    private boolean validarCampos()
+    {
+        String hora;
+        hora = validarHora(txtHora.getText());
+        
+        if(("".equals(txtNombre.getText())))
+        {
+            JOptionPane.showMessageDialog(this, "Error! \n El campo nombre no puede estar vacio", "Mensaje Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        else if(txtDias.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(this, "Error! \n No hay dias seleccionados", "Mensaje Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        else if(hora == null)
+        {
+            JOptionPane.showMessageDialog(this, "Error! \n El campo hora es incorrecto", "Mensaje Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
     private boolean comprobarSiElCursoExiste(Document documento)
     {
         Document cursoEncontrado;
@@ -358,7 +370,6 @@ public class DlgAgregarCurso extends javax.swing.JDialog
 
     private void botonCanelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCanelarActionPerformed
         dispose();
-        framePrincipal.setVisible(true);
     }//GEN-LAST:event_botonCanelarActionPerformed
 
    

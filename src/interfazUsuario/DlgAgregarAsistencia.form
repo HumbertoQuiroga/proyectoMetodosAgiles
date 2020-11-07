@@ -110,11 +110,11 @@
                       <Component id="etiquetaSeleccionarCurso" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="comboBoxCursos" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="11" max="32767" attributes="0"/>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtFecha" pref="22" max="32767" attributes="0"/>
+                      <Component id="txtFecha" pref="25" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <EmptySpace min="0" pref="4" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="7" max="32767" attributes="0"/>
                           <Component id="etiquetaFecha" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -125,7 +125,7 @@
                       <Component id="botonAceptar" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="botonCanelar" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -140,7 +140,7 @@
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSelectorArchivoActionPerformed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtSelectorArchivoMousePressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="etiquetaSeleccionarArchivo">
@@ -233,9 +233,6 @@
               </StringArray>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBoxCursosActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

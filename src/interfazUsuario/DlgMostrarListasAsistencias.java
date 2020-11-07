@@ -31,17 +31,20 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
      * @param modal
      * @param asistenciaCursosRepository
      * @param cursosRepo
+     * @param accion
      */
-    public DlgMostrarListasAsistencias(java.awt.Frame parent, boolean modal, AsistenciaCursosRepository asistenciaCursosRepository, CursosRepository cursosRepo) {
+    public DlgMostrarListasAsistencias(java.awt.Frame parent, boolean modal, AsistenciaCursosRepository asistenciaCursosRepository, CursosRepository cursosRepo, int accion) 
+    {
         super(parent, modal);
         this.initComponents();
         this.asistenciaCursosRepository = asistenciaCursosRepository;
         this.cursosRepo = cursosRepo;
         this.llenarComboBoxCursos();
         this.listaContenido = new ArrayList<>();
+        if(accion == ConstantesGUI.MODIFICAR){configurarParaModificar();}
+        else if(accion == ConstantesGUI.CONSULTAR){this.setTitle("Menu mostrar lista asistencias");}
         this.actualizarTablaLista();
         this.tablaLista.setDefaultRenderer(tablaLista.getColumnClass(1) ,mirender);
-        this.setTitle("Menu mostrar lista asistencias");
         this.setVisible(true);
     }
 
@@ -54,7 +57,7 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        panelFondo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         scrollPanelTablaLista = new javax.swing.JScrollPane();
         tablaLista = new javax.swing.JTable();
@@ -64,11 +67,20 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
         etiquetaSeleccionarFecha = new javax.swing.JLabel();
         botonBuscar = new javax.swing.JButton();
         botonSalir = new javax.swing.JButton();
+        botonGuardar = new javax.swing.JButton();
+        botonModificar = new javax.swing.JButton();
+        botonNuevoRegistro = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(240, 202, 171));
-        jPanel1.setPreferredSize(new java.awt.Dimension(966, 626));
+        panelFondo.setBackground(new java.awt.Color(240, 202, 171));
+        panelFondo.setPreferredSize(new java.awt.Dimension(966, 626));
+        panelFondo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                panelFondoMousePressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel1.setText("Lista de asistencias");
@@ -85,6 +97,12 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
 
             }
         ));
+        tablaLista.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaLista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaListaMousePressed(evt);
+            }
+        });
         scrollPanelTablaLista.setViewportView(tablaLista);
 
         etiquetaSeleccionarCurso.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
@@ -105,59 +123,98 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
         });
 
         botonSalir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        botonSalir.setText("Salir");
+        botonSalir.setText("Cancelar");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSalirActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        botonGuardar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        botonGuardar.setText("Guardar y salir");
+        botonGuardar.setVisible(false);
+        botonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarActionPerformed(evt);
+            }
+        });
+
+        botonModificar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        botonModificar.setText("Modificar");
+        botonModificar.setEnabled(false);
+        botonModificar.setVisible(false);
+        botonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarActionPerformed(evt);
+            }
+        });
+
+        botonNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        botonNuevoRegistro.setText("Nuevo registro");
+        botonNuevoRegistro.setVisible(false);
+        botonNuevoRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonNuevoRegistroActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
+        panelFondo.setLayout(panelFondoLayout);
+        panelFondoLayout.setHorizontalGroup(
+            panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFondoLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(scrollPanelTablaLista, javax.swing.GroupLayout.PREFERRED_SIZE, 896, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(etiquetaSeleccionarCurso)
-                            .addComponent(etiquetaSeleccionarFecha))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(campoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(botonBuscar))
-                            .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(35, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonSalir)
-                .addGap(31, 31, 31))
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelFondoLayout.createSequentialGroup()
+                        .addComponent(botonNuevoRegistro)
+                        .addGap(31, 31, 31)
+                        .addComponent(botonModificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonGuardar)
+                        .addGap(18, 18, 18)
+                        .addComponent(botonSalir)
+                        .addGap(31, 31, 31))
+                    .addGroup(panelFondoLayout.createSequentialGroup()
+                        .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(scrollPanelTablaLista, javax.swing.GroupLayout.PREFERRED_SIZE, 896, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelFondoLayout.createSequentialGroup()
+                                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(etiquetaSeleccionarCurso)
+                                    .addComponent(etiquetaSeleccionarFecha))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelFondoLayout.createSequentialGroup()
+                                        .addComponent(campoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(botonBuscar))
+                                    .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(35, Short.MAX_VALUE))))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panelFondoLayout.setVerticalGroup(
+            panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFondoLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
                 .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelFondoLayout.createSequentialGroup()
+                        .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(etiquetaSeleccionarCurso)
                             .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(etiquetaSeleccionarFecha)
                             .addComponent(campoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(botonBuscar))
                 .addGap(21, 21, 21)
                 .addComponent(scrollPanelTablaLista, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(botonSalir)
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonSalir)
+                    .addComponent(botonGuardar)
+                    .addComponent(botonModificar)
+                    .addComponent(botonNuevoRegistro))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -165,28 +222,48 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelFondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+            .addComponent(panelFondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void configurarParaModificar()
+    {
+        this.setTitle("Menu modificar lista asistencias");
+        this.botonSalir.setText("Cancelar");
+        this.botonGuardar.setVisible(true);
+        this.botonNuevoRegistro.setVisible(true);
+        this.botonModificar.setVisible(true);
+    }
+    
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
        if(comprobarCampos())
        {
-         if(asistenciaCursosRepository.buscarListaAsistencias(extraerCurso(), convertirFechaToString())!=null)
-         {
-            listaContenido = (List<Document>)asistenciaCursosRepository.buscarListaAsistencias(extraerCurso(), convertirFechaToString()).get("listaAsistencia");
-            actualizarTablaLista();
-         }
-         else{JOptionPane.showMessageDialog(this, "No se encontro ningun registro en el curso,\n "
-        +"Nombre:"+extraerCurso().getString("nombre")+", Periodo:"+extraerCurso().getString("periodo")+", Dias:"+extraerCurso().getString("dias")+", Hora:"+extraerCurso().getString("hora")
-        +",\n en la fecha: "+convertirFechaToString()+"\n Compruebe si los datos son correctos!", "Mensaje Aviso", JOptionPane.INFORMATION_MESSAGE);}
+            if(asistenciaCursosRepository.buscarListaAsistencias(extraerCurso(), convertirFechaToString())!=null)
+            {
+               listaContenido = (List<Document>) asistenciaCursosRepository.buscarListaAsistencias(extraerCurso(), convertirFechaToString()).get("listaAsistencia");
+               actualizarTablaLista();
+            }
+            else
+            {
+                if(!botonNuevoRegistro.isVisible())
+                {
+                    JOptionPane.showMessageDialog(this, "No se encontro ningun registro en el curso,\n "
+                    +"Nombre:"+extraerCurso().getString("nombre")+", Periodo:"+extraerCurso().getString("periodo")+", Dias:"+extraerCurso().getString("dias")+", Hora:"+extraerCurso().getString("hora")
+                    +",\n en la fecha: "+convertirFechaToString()+"\n Compruebe si los datos son correctos!", "Mensaje Aviso", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else
+                {
+                    listaContenido.clear();
+                    actualizarTablaLista();
+                }
+            }
        }
     }//GEN-LAST:event_botonBuscarActionPerformed
 
@@ -194,6 +271,58 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
+    private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
+        if(asistenciaCursosRepository.buscarListaAsistencias(extraerCurso(), convertirFechaToString())!=null)
+        {
+           asistenciaCursosRepository.actualizarListaAsistencias(extraerCurso(), convertirFechaToString() , listaContenido);
+        }
+        else
+        {
+            Document listaAsistenciaNueva = new Document();
+            listaAsistenciaNueva.append("curso", extraerCurso());
+            listaAsistenciaNueva.append("fecha", convertirFechaToString());
+            listaAsistenciaNueva.append("listaAsistencia", listaContenido);
+            asistenciaCursosRepository.agregarDoumento(listaAsistenciaNueva);
+        }
+        dispose();
+    }//GEN-LAST:event_botonGuardarActionPerformed
+
+    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
+       DlgAlumnoLista modificarAlumno = new DlgAlumnoLista(null, rootPaneCheckingEnabled, listaContenido.get(tablaLista.getSelectedRow()),ConstantesGUI.MODIFICAR);
+       actualizarTablaLista();
+       botonModificar.setEnabled(false);
+       
+    }//GEN-LAST:event_botonModificarActionPerformed
+
+    private void botonNuevoRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoRegistroActionPerformed
+        if(comprobarCampos())
+        {
+            Document estudianteNuevo = new Document();
+            DlgAlumnoLista agregarAlumno = new DlgAlumnoLista(null, rootPaneCheckingEnabled, estudianteNuevo, ConstantesGUI.AGREGAR);
+            if(!estudianteNuevo.isEmpty())
+            {
+                listaContenido.add(estudianteNuevo);
+                actualizarTablaLista();
+            }
+        }
+    }//GEN-LAST:event_botonNuevoRegistroActionPerformed
+
+    private void tablaListaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaListaMousePressed
+       if(tablaLista.getSelectedRow() != -1)
+       {
+           botonModificar.setEnabled(true);
+       }
+    }//GEN-LAST:event_tablaListaMousePressed
+
+    private void panelFondoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelFondoMousePressed
+       if(tablaLista.getSelectedRow() != -1)
+       {
+           botonModificar.setEnabled(false);
+           tablaLista.clearSelection();
+       }
+    }//GEN-LAST:event_panelFondoMousePressed
+
+   
     private Object[][] convertirListaAsistenciasAObjetos()
     {
         if(!listaContenido.isEmpty())
@@ -294,13 +423,16 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
+    private javax.swing.JButton botonGuardar;
+    private javax.swing.JButton botonModificar;
+    private javax.swing.JButton botonNuevoRegistro;
     private javax.swing.JButton botonSalir;
     private com.toedter.calendar.JDateChooser campoFecha;
     private javax.swing.JComboBox<String> comboBoxCursos;
     private javax.swing.JLabel etiquetaSeleccionarCurso;
     private javax.swing.JLabel etiquetaSeleccionarFecha;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel panelFondo;
     private javax.swing.JScrollPane scrollPanelTablaLista;
     private javax.swing.JTable tablaLista;
     // End of variables declaration//GEN-END:variables
