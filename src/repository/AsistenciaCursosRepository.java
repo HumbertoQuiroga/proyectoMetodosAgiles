@@ -5,10 +5,6 @@
  */
 package repository;
 
-import com.mongodb.CommandResult;
-import com.mongodb.client.model.FindOneAndUpdateOptions;
-import com.mongodb.client.model.UpdateOptions;
-import com.mongodb.client.result.UpdateResult;
 import java.util.List;
 import org.bson.Document;
 import org.bson.conversions.Bson;

@@ -30,7 +30,7 @@ public class DlgAgregarCurso extends javax.swing.JDialog
         super(parent, modal);
         this.initComponents();
         this.cursosRepo = cursosRepo;
-        this.setTitle("Menu agregar curso");
+        this.setTitle("Agregar Curso");
         this.setVisible(true);
     }
 

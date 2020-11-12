@@ -16,6 +16,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.bson.Document;
 import repository.AsistenciaCursosRepository;
 import repository.CursosRepository;
+import repository.UnidadesRepository;
 
 /**
  *
@@ -28,6 +29,7 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
     private MiRender mirender = new MiRender();
     private AsistenciaCursosRepository asistenciaCursosRepository;
     private CursosRepository cursosRepo;
+    private UnidadesRepository unidadesRepository;
     
     /**
      * Creates new form DlgAgregarAsistencia
@@ -35,18 +37,20 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
      * @param modal
      * @param asistenciaCursosRepository
      * @param cursosRepo
+     * @param unidadesRepository
      */
-    public DlgAgregarAsistencia(java.awt.Frame parent, boolean modal, AsistenciaCursosRepository asistenciaCursosRepository, CursosRepository cursosRepo) 
+    public DlgAgregarAsistencia(java.awt.Frame parent, boolean modal, AsistenciaCursosRepository asistenciaCursosRepository, CursosRepository cursosRepo, UnidadesRepository unidadesRepository) 
     {
         super(parent, modal);
         this.initComponents();
+        this.unidadesRepository = unidadesRepository;
         this.asistenciaCursosRepository = asistenciaCursosRepository;
         this.cursosRepo = cursosRepo;
         this.llenarComboBoxCursos();
         this.listaContenido = new ArrayList<>();
         this.actualizarTablaLista();
         this.tablaLista.setDefaultRenderer(tablaLista.getColumnClass(1) ,mirender);
-        this.setTitle("Menu agregar asistencia");
+        this.setTitle("Agregar Asistencia");
         this.setVisible(true);
     }
 
@@ -72,6 +76,8 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         comboBoxCursos = new javax.swing.JComboBox<>();
         etiquetaFecha = new javax.swing.JLabel();
         txtFecha = new javax.swing.JLabel();
+        etiquetaSeleccionarCurso1 = new javax.swing.JLabel();
+        comboBoxUnidad = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -136,11 +142,23 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
 
         comboBoxCursos.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         comboBoxCursos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar curso" }));
+        comboBoxCursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxCursosActionPerformed(evt);
+            }
+        });
 
         etiquetaFecha.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         etiquetaFecha.setText("Fecha: ");
 
         txtFecha.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+
+        etiquetaSeleccionarCurso1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        etiquetaSeleccionarCurso1.setText("Seleccionar curso: ");
+
+        comboBoxUnidad.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        comboBoxUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar unidad" }));
+        comboBoxUnidad.setPreferredSize(new java.awt.Dimension(155, 25));
 
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
         panelFondo.setLayout(panelFondoLayout);
@@ -166,11 +184,13 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
                             .addGroup(panelFondoLayout.createSequentialGroup()
                                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(etiquetaSeleccionarArchivo)
-                                    .addComponent(etiquetaSeleccionarCurso))
+                                    .addComponent(etiquetaSeleccionarCurso)
+                                    .addComponent(etiquetaSeleccionarCurso1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtSelectorArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
-                                    .addComponent(comboBoxCursos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(comboBoxCursos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(comboBoxUnidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(botonBuscarArchivo))
                             .addGroup(panelFondoLayout.createSequentialGroup()
@@ -190,15 +210,19 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
                     .addComponent(etiquetaSeleccionarArchivo)
                     .addComponent(txtSelectorArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonBuscarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etiquetaSeleccionarCurso)
                     .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(etiquetaSeleccionarCurso1)
+                    .addComponent(comboBoxUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelFondoLayout.createSequentialGroup()
-                        .addGap(0, 7, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(etiquetaFecha)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollPanelTablaLista, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,7 +241,7 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelFondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -250,6 +274,7 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         {   
              Document doc = new Document();
              doc.append("curso", extraerCurso());
+             doc.append("unidad", extraerUnidad());
              doc.append("fecha", convertirFecha(listaContenido.get(0)[0]));
              doc.append("listaAsistencia", obtenerListaContendioJSON());
              if(comprobarSiElRegistroExiste(extraerCurso(), convertirFecha(listaContenido.get(0)[0])))
@@ -270,9 +295,14 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
            JOptionPane.showMessageDialog(this, "Error! \n No se ha abierto ningun documento con contenido", "Mensaje Error", JOptionPane.ERROR_MESSAGE);
            return false;
        }
-        else if(!comprovarSelectorCurso())
+       else if(comboBoxCursos.getSelectedItem().equals("Seleccionar curso"))
        {
            JOptionPane.showMessageDialog(this, "Error! \n No se ha seleccionado ningun curso", "Mensaje Error", JOptionPane.ERROR_MESSAGE);
+           return false;
+       }
+       else if(comboBoxUnidad.getSelectedItem().equals("Seleccionar unidad"))
+       {
+           JOptionPane.showMessageDialog(this, "Error! \n No se ha seleccionado ninguna unidad", "Mensaje Error", JOptionPane.ERROR_MESSAGE);
            return false;
        }
        return true;    
@@ -295,6 +325,19 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         }
     }//GEN-LAST:event_txtSelectorArchivoMousePressed
 
+    private void comboBoxCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxCursosActionPerformed
+        if(comboBoxCursos.getSelectedIndex()!=0)
+        {
+            List<Document> listaUnidades = unidadesRepository.buscarUnidades(extraerCurso());
+            llenarComboBoxUnidades(listaUnidades);
+        }
+        else
+        {
+            comboBoxUnidad.removeAllItems();
+            comboBoxUnidad.addItem("Seleccionar unidad");
+        }
+    }//GEN-LAST:event_comboBoxCursosActionPerformed
+
     private boolean comprobarSiElRegistroExiste(Document documento, String fecha)
     {
         return asistenciaCursosRepository.buscarListaAsistencias(documento, fecha) == null;
@@ -310,6 +353,17 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         documentoCurso.append("dias", curso[2].substring(curso[2].indexOf(":")+2, curso[2].length()));
         documentoCurso.append("hora", curso[3].substring(curso[3].indexOf(":")+2, curso[3].length()));
         return documentoCurso;
+    }
+    
+    private Document extraerUnidad()
+    {
+        String[] unidad;
+        Document documentoUnidad = new Document();
+        unidad = comboBoxUnidad.getSelectedItem().toString().split(",");
+        documentoUnidad.append("indice", unidad[0].substring(unidad[0].indexOf(":")+2, unidad[0].length()));
+        documentoUnidad.append("nombre", unidad[1].substring(unidad[1].indexOf(":")+2, unidad[1].length()));
+        documentoUnidad.append("descripcion", unidad[2].substring(unidad[2].indexOf(":")+2, unidad[2].length()));
+        return documentoUnidad;
     }
     
     private String convertirFecha(String fecha)
@@ -334,12 +388,6 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         }
         return listaContenidoJSON;
     }
-    
-    private boolean comprovarSelectorCurso()
-    {
-        return !comboBoxCursos.getSelectedItem().equals("Seleccionar curso");
-    }
-    
     
     private boolean comprobarArchivo(String nombreArchivo)
     {
@@ -399,6 +447,40 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         }else{return null;}
     }
     
+    private void llenarComboBoxUnidades(List<Document> listaUnidades)
+    {
+       comboBoxUnidad.removeAllItems();
+       comboBoxUnidad.addItem("Seleccionar unidad");
+       
+       Object[][] unidadesObj = new Object[listaUnidades.size()][3];
+        for(int cont=0; cont < listaUnidades.size() ;cont++)
+        {
+            int indice = Integer.valueOf(listaUnidades.get(cont).getString("indice"));
+            int pos=0;
+            for(int cont2=0 ; cont2 < listaUnidades.size() ;cont2++)
+            {
+                int indice2 = Integer.valueOf(listaUnidades.get(cont2).getString("indice"));
+                if(indice != indice2)
+                {
+                    if(indice > indice2)
+                    {
+                        pos = pos+1;
+                    }
+                }
+            }
+            unidadesObj[pos][0] = listaUnidades.get(cont).getString("indice");
+            unidadesObj[pos][1] = listaUnidades.get(cont).getString("nombre");
+            unidadesObj[pos][2] = listaUnidades.get(cont).getString("descripcion");
+        }
+       for(int cont=0 ;cont < listaUnidades.size() ;cont++)
+       {
+           comboBoxUnidad.addItem("Indice: "+unidadesObj[cont][0]+
+                                ", Nombre: "+unidadesObj[cont][1]+
+                                ", Descripcion: "+unidadesObj[cont][2]);
+       }
+    }
+    
+    
     private void llenarComboBoxCursos()
     {
        List<Document> listaCursos = cursosRepo.buscarRegistrosEnLaColeccion();
@@ -417,9 +499,11 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
     private javax.swing.JButton botonBuscarArchivo;
     private javax.swing.JButton botonCanelar;
     private javax.swing.JComboBox<String> comboBoxCursos;
+    private javax.swing.JComboBox<String> comboBoxUnidad;
     private javax.swing.JLabel etiquetaFecha;
     private javax.swing.JLabel etiquetaSeleccionarArchivo;
     private javax.swing.JLabel etiquetaSeleccionarCurso;
+    private javax.swing.JLabel etiquetaSeleccionarCurso1;
     private javax.swing.JLabel etiquetaTitulo;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JScrollPane scrollPanelTablaLista;

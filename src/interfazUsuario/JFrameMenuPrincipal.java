@@ -10,6 +10,7 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
     
     private static CursosRepository cursosRepo;
     private static AsistenciaCursosRepository asistenciaCursosRepository;
+    private static UnidadesRepository unidadesRepository;
 
     /**
      * Creates new form MenuPrincipal
@@ -17,8 +18,10 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
     public JFrameMenuPrincipal() 
     {
         cursosRepo = new CursosRepository();
+        unidadesRepository = new UnidadesRepository();
         asistenciaCursosRepository = new AsistenciaCursosRepository();
         initComponents();
+        this.setTitle("Principal");
     }
 
     /**
@@ -31,24 +34,30 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         panelFondo = new javax.swing.JPanel();
+        etiquetaTitulo = new javax.swing.JLabel();
         cajaAgregarCurso = new javax.swing.JPanel();
         botonAgregarCurso = new javax.swing.JButton();
         etiquetaAgragarCursos = new javax.swing.JLabel();
-        etiquetaTitulo = new javax.swing.JLabel();
         cajaMostrarCurso = new javax.swing.JPanel();
         botonMostrarCurso = new javax.swing.JButton();
         etiquetaMostrarCurso = new javax.swing.JLabel();
+        cajaAgregarUnidad = new javax.swing.JPanel();
+        etiquetaAgregarUnidad = new javax.swing.JLabel();
+        botonAgregarUnidad = new javax.swing.JButton();
+        cajaMostrarUnidades = new javax.swing.JPanel();
+        etiquetaMostrarUnidades = new javax.swing.JLabel();
+        botonMostrarUnidades = new javax.swing.JButton();
         cajaAgregarAsistencia = new javax.swing.JPanel();
         etiquetaAgregarAsistencia = new javax.swing.JLabel();
         botonAgregarAsistencia = new javax.swing.JButton();
         cajaMostrarListaAsistencias = new javax.swing.JPanel();
         etiquetaMostrarListasAsistencias = new javax.swing.JLabel();
         botonMostrarListasAsistencias = new javax.swing.JButton();
+        cajaModificarAsistencias = new javax.swing.JPanel();
+        etiquetaModificarAsistencias = new javax.swing.JLabel();
+        botonModificarAsistencias = new javax.swing.JButton();
         cajaSalir = new javax.swing.JPanel();
         botonSalir = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Principal");
@@ -56,6 +65,9 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
 
         panelFondo.setBackground(new java.awt.Color(240, 202, 171));
         panelFondo.setPreferredSize(new java.awt.Dimension(800, 486));
+
+        etiquetaTitulo.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        etiquetaTitulo.setText("Administrador de cursos");
 
         cajaAgregarCurso.setBackground(new java.awt.Color(202, 7, 54));
         cajaAgregarCurso.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -104,9 +116,6 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        etiquetaTitulo.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        etiquetaTitulo.setText("Administrador de cursos");
-
         cajaMostrarCurso.setBackground(new java.awt.Color(112, 141, 123));
         cajaMostrarCurso.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         cajaMostrarCurso.setPreferredSize(new java.awt.Dimension(326, 82));
@@ -150,6 +159,88 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
                 .addGroup(cajaMostrarCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(botonMostrarCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(etiquetaMostrarCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        cajaAgregarUnidad.setBackground(new java.awt.Color(0, 51, 51));
+        cajaAgregarUnidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        cajaAgregarUnidad.setPreferredSize(new java.awt.Dimension(326, 82));
+
+        etiquetaAgregarUnidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agregarUnidad_icono.png"))); // NOI18N
+        etiquetaAgregarUnidad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                etiquetaAgregarUnidadMousePressed(evt);
+            }
+        });
+
+        botonAgregarUnidad.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        botonAgregarUnidad.setForeground(new java.awt.Color(255, 255, 255));
+        botonAgregarUnidad.setText("Agregar Unidad");
+        botonAgregarUnidad.setContentAreaFilled(false);
+        botonAgregarUnidad.setPreferredSize(new java.awt.Dimension(240, 80));
+        botonAgregarUnidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAgregarUnidadActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout cajaAgregarUnidadLayout = new javax.swing.GroupLayout(cajaAgregarUnidad);
+        cajaAgregarUnidad.setLayout(cajaAgregarUnidadLayout);
+        cajaAgregarUnidadLayout.setHorizontalGroup(
+            cajaAgregarUnidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cajaAgregarUnidadLayout.createSequentialGroup()
+                .addComponent(etiquetaAgregarUnidad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonAgregarUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        cajaAgregarUnidadLayout.setVerticalGroup(
+            cajaAgregarUnidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cajaAgregarUnidadLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(etiquetaAgregarUnidad))
+            .addGroup(cajaAgregarUnidadLayout.createSequentialGroup()
+                .addComponent(botonAgregarUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        cajaMostrarUnidades.setBackground(new java.awt.Color(209, 216, 20));
+        cajaMostrarUnidades.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        cajaMostrarUnidades.setPreferredSize(new java.awt.Dimension(326, 82));
+
+        etiquetaMostrarUnidades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mostrarUnidades_icono.png"))); // NOI18N
+        etiquetaMostrarUnidades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                etiquetaMostrarUnidadesMousePressed(evt);
+            }
+        });
+
+        botonMostrarUnidades.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        botonMostrarUnidades.setForeground(new java.awt.Color(255, 255, 255));
+        botonMostrarUnidades.setText("Mostrar Unidades");
+        botonMostrarUnidades.setContentAreaFilled(false);
+        botonMostrarUnidades.setPreferredSize(new java.awt.Dimension(240, 80));
+        botonMostrarUnidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonMostrarUnidadesActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout cajaMostrarUnidadesLayout = new javax.swing.GroupLayout(cajaMostrarUnidades);
+        cajaMostrarUnidades.setLayout(cajaMostrarUnidadesLayout);
+        cajaMostrarUnidadesLayout.setHorizontalGroup(
+            cajaMostrarUnidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cajaMostrarUnidadesLayout.createSequentialGroup()
+                .addComponent(etiquetaMostrarUnidades)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonMostrarUnidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        cajaMostrarUnidadesLayout.setVerticalGroup(
+            cajaMostrarUnidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cajaMostrarUnidadesLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(etiquetaMostrarUnidades))
+            .addComponent(botonMostrarUnidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         cajaAgregarAsistencia.setBackground(new java.awt.Color(103, 155, 255));
@@ -238,6 +329,47 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
                 .addGap(5, 5, 5))
         );
 
+        cajaModificarAsistencias.setBackground(new java.awt.Color(102, 102, 102));
+        cajaModificarAsistencias.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        cajaModificarAsistencias.setPreferredSize(new java.awt.Dimension(326, 82));
+
+        etiquetaModificarAsistencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/modificarLista-icono2.png"))); // NOI18N
+        etiquetaModificarAsistencias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                etiquetaModificarAsistenciasMousePressed(evt);
+            }
+        });
+
+        botonModificarAsistencias.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        botonModificarAsistencias.setForeground(new java.awt.Color(255, 255, 255));
+        botonModificarAsistencias.setText("Modificar Asistencias");
+        botonModificarAsistencias.setContentAreaFilled(false);
+        botonModificarAsistencias.setPreferredSize(new java.awt.Dimension(240, 80));
+        botonModificarAsistencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarAsistenciasActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout cajaModificarAsistenciasLayout = new javax.swing.GroupLayout(cajaModificarAsistencias);
+        cajaModificarAsistencias.setLayout(cajaModificarAsistenciasLayout);
+        cajaModificarAsistenciasLayout.setHorizontalGroup(
+            cajaModificarAsistenciasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cajaModificarAsistenciasLayout.createSequentialGroup()
+                .addComponent(etiquetaModificarAsistencias)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonModificarAsistencias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        cajaModificarAsistenciasLayout.setVerticalGroup(
+            cajaModificarAsistenciasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cajaModificarAsistenciasLayout.createSequentialGroup()
+                .addGroup(cajaModificarAsistenciasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(etiquetaModificarAsistencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonModificarAsistencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         cajaSalir.setBackground(new java.awt.Color(0, 0, 0));
 
         botonSalir.setBackground(new java.awt.Color(255, 255, 153));
@@ -267,91 +399,57 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
                 .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.setPreferredSize(new java.awt.Dimension(326, 82));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/modificarLista-icono2.png"))); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel1MousePressed(evt);
-            }
-        });
-
-        jButton1.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Modificar Asistencias");
-        jButton1.setContentAreaFilled(false);
-        jButton1.setPreferredSize(new java.awt.Dimension(240, 80));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
         panelFondo.setLayout(panelFondoLayout);
         panelFondoLayout.setHorizontalGroup(
             panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFondoLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(50, 50, 50)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelFondoLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panelFondoLayout.createSequentialGroup()
-                        .addComponent(etiquetaTitulo)
+                        .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cajaModificarAsistencias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(etiquetaTitulo))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondoLayout.createSequentialGroup()
                         .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panelFondoLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(cajaSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cajaAgregarUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cajaMostrarUnidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelFondoLayout.createSequentialGroup()
                                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cajaAgregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cajaAgregarAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 58, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cajaMostrarListaAsistencias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cajaMostrarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(45, 45, 45))))
+                                    .addComponent(cajaMostrarCurso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cajaMostrarListaAsistencias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panelFondoLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(cajaSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(50, 50, 50))))
         );
         panelFondoLayout.setVerticalGroup(
             panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondoLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(etiquetaTitulo)
-                .addGap(18, 21, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cajaAgregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cajaMostrarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(30, 30, 30)
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cajaAgregarUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cajaMostrarUnidades, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cajaAgregarAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cajaMostrarListaAsistencias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGap(30, 30, 30)
+                .addComponent(cajaModificarAsistencias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(cajaSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -364,7 +462,7 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
+            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
         );
 
         panelFondo.getAccessibleContext().setAccessibleDescription("");
@@ -373,49 +471,65 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarCursoActionPerformed
-        DlgAgregarCurso agregarCurso = new DlgAgregarCurso(this, rootPaneCheckingEnabled, cursosRepo);
-    }//GEN-LAST:event_botonAgregarCursoActionPerformed
-
-    private void botonMostrarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarCursoActionPerformed
-        DlgMostrarCursos mostrarCursos = new DlgMostrarCursos(this, rootPaneCheckingEnabled, cursosRepo);
-    }//GEN-LAST:event_botonMostrarCursoActionPerformed
-
-    private void botonAgregarAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarAsistenciaActionPerformed
-        DlgAgregarAsistencia agregarAsistencia = new DlgAgregarAsistencia(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo);
-    }//GEN-LAST:event_botonAgregarAsistenciaActionPerformed
-
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_botonSalirActionPerformed
 
+    private void botonModificarAsistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarAsistenciasActionPerformed
+        DlgMostrarListasAsistencias modificarAsistencias = new DlgMostrarListasAsistencias(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo, ConstantesGUI.MODIFICAR);
+    }//GEN-LAST:event_botonModificarAsistenciasActionPerformed
+
+    private void etiquetaModificarAsistenciasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_etiquetaModificarAsistenciasMousePressed
+        DlgMostrarListasAsistencias modificarAsistencias = new DlgMostrarListasAsistencias(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo, ConstantesGUI.MODIFICAR);
+    }//GEN-LAST:event_etiquetaModificarAsistenciasMousePressed
+
     private void botonMostrarListasAsistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarListasAsistenciasActionPerformed
-        DlgMostrarListasAsistencias mostrarListaAsistencias = new DlgMostrarListasAsistencias(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo, ConstantesGUI.CONSULTAR);
+        DlgModoMuestraListasAsistencias seleccionarModoMostrar = new DlgModoMuestraListasAsistencias(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo, unidadesRepository);
     }//GEN-LAST:event_botonMostrarListasAsistenciasActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DlgMostrarListasAsistencias modificarAsistencias = new DlgMostrarListasAsistencias(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo, ConstantesGUI.MODIFICAR);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void etiquetaMostrarListasAsistenciasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_etiquetaMostrarListasAsistenciasMousePressed
+        DlgModoMuestraListasAsistencias seleccionarModoMostrar = new DlgModoMuestraListasAsistencias(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo, unidadesRepository);
+    }//GEN-LAST:event_etiquetaMostrarListasAsistenciasMousePressed
 
-    private void etiquetaAgragarCursosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_etiquetaAgragarCursosMousePressed
-        DlgAgregarCurso agregarCurso = new DlgAgregarCurso(this, rootPaneCheckingEnabled, cursosRepo);
-    }//GEN-LAST:event_etiquetaAgragarCursosMousePressed
+    private void botonAgregarAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarAsistenciaActionPerformed
+        DlgAgregarAsistencia agregarAsistencia = new DlgAgregarAsistencia(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo, unidadesRepository);
+    }//GEN-LAST:event_botonAgregarAsistenciaActionPerformed
+
+    private void etiquetaAgregarAsistenciaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_etiquetaAgregarAsistenciaMousePressed
+        DlgAgregarAsistencia agregarAsistencia = new DlgAgregarAsistencia(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo, unidadesRepository);
+    }//GEN-LAST:event_etiquetaAgregarAsistenciaMousePressed
 
     private void etiquetaMostrarCursoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_etiquetaMostrarCursoMousePressed
         DlgMostrarCursos mostrarCursos = new DlgMostrarCursos(this, rootPaneCheckingEnabled, cursosRepo);
     }//GEN-LAST:event_etiquetaMostrarCursoMousePressed
 
-    private void etiquetaAgregarAsistenciaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_etiquetaAgregarAsistenciaMousePressed
-        DlgAgregarAsistencia agregarAsistencia = new DlgAgregarAsistencia(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo);
-    }//GEN-LAST:event_etiquetaAgregarAsistenciaMousePressed
+    private void botonMostrarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarCursoActionPerformed
+        DlgMostrarCursos mostrarCursos = new DlgMostrarCursos(this, rootPaneCheckingEnabled, cursosRepo);
+    }//GEN-LAST:event_botonMostrarCursoActionPerformed
 
-    private void etiquetaMostrarListasAsistenciasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_etiquetaMostrarListasAsistenciasMousePressed
-        DlgMostrarListasAsistencias mostrarListaAsistencias = new DlgMostrarListasAsistencias(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo, ConstantesGUI.CONSULTAR);
-    }//GEN-LAST:event_etiquetaMostrarListasAsistenciasMousePressed
+    private void etiquetaAgragarCursosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_etiquetaAgragarCursosMousePressed
+        DlgAgregarCurso agregarCurso = new DlgAgregarCurso(this, rootPaneCheckingEnabled, cursosRepo);
+    }//GEN-LAST:event_etiquetaAgragarCursosMousePressed
 
-    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-        DlgMostrarListasAsistencias modificarAsistencias = new DlgMostrarListasAsistencias(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo, ConstantesGUI.MODIFICAR);
-    }//GEN-LAST:event_jLabel1MousePressed
+    private void botonAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarCursoActionPerformed
+        DlgAgregarCurso agregarCurso = new DlgAgregarCurso(this, rootPaneCheckingEnabled, cursosRepo);
+    }//GEN-LAST:event_botonAgregarCursoActionPerformed
+
+    private void botonAgregarUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarUnidadActionPerformed
+        DlgAgregarUnidad agregarUnidad = new DlgAgregarUnidad(this, rootPaneCheckingEnabled, cursosRepo, unidadesRepository);
+    }//GEN-LAST:event_botonAgregarUnidadActionPerformed
+
+    private void botonMostrarUnidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarUnidadesActionPerformed
+        DlgMostrarUnidades mostrarUnidades = new DlgMostrarUnidades(this, rootPaneCheckingEnabled, cursosRepo, unidadesRepository);
+    }//GEN-LAST:event_botonMostrarUnidadesActionPerformed
+
+    private void etiquetaAgregarUnidadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_etiquetaAgregarUnidadMousePressed
+        DlgAgregarUnidad agregarUnidad = new DlgAgregarUnidad(this, rootPaneCheckingEnabled, cursosRepo, unidadesRepository);
+    }//GEN-LAST:event_etiquetaAgregarUnidadMousePressed
+
+    private void etiquetaMostrarUnidadesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_etiquetaMostrarUnidadesMousePressed
+        DlgMostrarUnidades mostrarUnidades = new DlgMostrarUnidades(this, rootPaneCheckingEnabled, cursosRepo, unidadesRepository);
+    }//GEN-LAST:event_etiquetaMostrarUnidadesMousePressed
 
     /**
      * @param args the command line arguments
@@ -456,22 +570,28 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAgregarAsistencia;
     private javax.swing.JButton botonAgregarCurso;
+    private javax.swing.JButton botonAgregarUnidad;
+    private javax.swing.JButton botonModificarAsistencias;
     private javax.swing.JButton botonMostrarCurso;
     private javax.swing.JButton botonMostrarListasAsistencias;
+    private javax.swing.JButton botonMostrarUnidades;
     private javax.swing.JButton botonSalir;
     private javax.swing.JPanel cajaAgregarAsistencia;
     private javax.swing.JPanel cajaAgregarCurso;
+    private javax.swing.JPanel cajaAgregarUnidad;
+    private javax.swing.JPanel cajaModificarAsistencias;
     private javax.swing.JPanel cajaMostrarCurso;
     private javax.swing.JPanel cajaMostrarListaAsistencias;
+    private javax.swing.JPanel cajaMostrarUnidades;
     private javax.swing.JPanel cajaSalir;
     private javax.swing.JLabel etiquetaAgragarCursos;
     private javax.swing.JLabel etiquetaAgregarAsistencia;
+    private javax.swing.JLabel etiquetaAgregarUnidad;
+    private javax.swing.JLabel etiquetaModificarAsistencias;
     private javax.swing.JLabel etiquetaMostrarCurso;
     private javax.swing.JLabel etiquetaMostrarListasAsistencias;
+    private javax.swing.JLabel etiquetaMostrarUnidades;
     private javax.swing.JLabel etiquetaTitulo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelFondo;
     // End of variables declaration//GEN-END:variables
 }

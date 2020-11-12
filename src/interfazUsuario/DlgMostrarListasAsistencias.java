@@ -42,7 +42,7 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
         this.llenarComboBoxCursos();
         this.listaContenido = new ArrayList<>();
         if(accion == ConstantesGUI.MODIFICAR){configurarParaModificar();}
-        else if(accion == ConstantesGUI.CONSULTAR){this.setTitle("Menu mostrar lista asistencias");}
+        else if(accion == ConstantesGUI.CONSULTAR){this.setTitle("Mostrar Asistencias");}
         this.actualizarTablaLista();
         this.tablaLista.setDefaultRenderer(tablaLista.getColumnClass(1) ,mirender);
         this.setVisible(true);

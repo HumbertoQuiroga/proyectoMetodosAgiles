@@ -34,12 +34,12 @@ public class DlgAlumnoLista extends javax.swing.JDialog
         this.accion = accion;
         if(accion == ConstantesGUI.MODIFICAR)
         {
-            this.setTitle("Modificar alumno");
+            this.setTitle("Modificar Alumno");
             this.setAtributosAlumno();
         }
         else if(accion == ConstantesGUI.AGREGAR)
         {
-           this.setTitle("Agregar alumno");
+           this.setTitle("Agregar Alumno");
            this.etiquetaTitulo.setText("Agregar alumno");
            this.botonAceptar.setText("Agregar"); 
         }

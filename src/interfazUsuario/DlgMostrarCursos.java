@@ -26,10 +26,10 @@ public class DlgMostrarCursos extends javax.swing.JDialog
     public DlgMostrarCursos(java.awt.Frame parent, boolean modal, CursosRepository cursosRepo) 
     {
         super(parent, modal);
-        this.cursosRepo = cursosRepo;
         this.initComponents();
+        this.cursosRepo = cursosRepo;
         this.actualizarTablaCursos();
-        this.setTitle("Menu mostrar cursos");
+        this.setTitle("Mostrar Cursos");
         this.setVisible(true);
     }
 
@@ -46,7 +46,7 @@ public class DlgMostrarCursos extends javax.swing.JDialog
         ScrollPanelTabla = new javax.swing.JScrollPane();
         tablaCursos = new javax.swing.JTable();
         etiquetaTitulo = new javax.swing.JLabel();
-        botonAceptar = new javax.swing.JButton();
+        botonSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -68,11 +68,11 @@ public class DlgMostrarCursos extends javax.swing.JDialog
         etiquetaTitulo.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         etiquetaTitulo.setText("Lista de cursos registrados");
 
-        botonAceptar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        botonAceptar.setText("Aceptar");
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+        botonSalir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        botonSalir.setText("Salir");
+        botonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAceptarActionPerformed(evt);
+                botonSalirActionPerformed(evt);
             }
         });
 
@@ -88,8 +88,8 @@ public class DlgMostrarCursos extends javax.swing.JDialog
                         .addComponent(etiquetaTitulo)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondoLayout.createSequentialGroup()
-                        .addGap(0, 677, Short.MAX_VALUE)
-                        .addComponent(botonAceptar)))
+                        .addGap(0, 697, Short.MAX_VALUE)
+                        .addComponent(botonSalir)))
                 .addGap(25, 25, 25))
         );
         panelFondoLayout.setVerticalGroup(
@@ -100,7 +100,7 @@ public class DlgMostrarCursos extends javax.swing.JDialog
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(ScrollPanelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(botonAceptar)
+                .addComponent(botonSalir)
                 .addGap(20, 20, 20))
         );
 
@@ -119,9 +119,9 @@ public class DlgMostrarCursos extends javax.swing.JDialog
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         dispose();
-    }//GEN-LAST:event_botonAceptarActionPerformed
+    }//GEN-LAST:event_botonSalirActionPerformed
 
     private void actualizarTablaCursos()
     {
@@ -170,7 +170,7 @@ public class DlgMostrarCursos extends javax.swing.JDialog
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollPanelTabla;
-    private javax.swing.JButton botonAceptar;
+    private javax.swing.JButton botonSalir;
     private javax.swing.JLabel etiquetaTitulo;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JTable tablaCursos;
