@@ -18,7 +18,7 @@ import repository.CursosRepository;
  *
  * @author Alfredo Perez
  */
-public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
+public class DlgMostrarListasAsistenciasPorFecha extends javax.swing.JDialog {
 
     private MiRender mirender = new MiRender();
     private AsistenciaCursosRepository asistenciaCursosRepository;
@@ -33,7 +33,7 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
      * @param cursosRepo
      * @param accion
      */
-    public DlgMostrarListasAsistencias(java.awt.Frame parent, boolean modal, AsistenciaCursosRepository asistenciaCursosRepository, CursosRepository cursosRepo, int accion) 
+    public DlgMostrarListasAsistenciasPorFecha(java.awt.Frame parent, boolean modal, AsistenciaCursosRepository asistenciaCursosRepository, CursosRepository cursosRepo, int accion) 
     {
         super(parent, modal);
         this.initComponents();
@@ -58,7 +58,7 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
     private void initComponents() {
 
         panelFondo = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        etiquetaTitulo = new javax.swing.JLabel();
         scrollPanelTablaLista = new javax.swing.JScrollPane();
         tablaLista = new javax.swing.JTable();
         etiquetaSeleccionarCurso = new javax.swing.JLabel();
@@ -75,15 +75,15 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
         setResizable(false);
 
         panelFondo.setBackground(new java.awt.Color(240, 202, 171));
-        panelFondo.setPreferredSize(new java.awt.Dimension(966, 626));
+        panelFondo.setPreferredSize(new java.awt.Dimension(973, 626));
         panelFondo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 panelFondoMousePressed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel1.setText("Lista de asistencias");
+        etiquetaTitulo.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        etiquetaTitulo.setText("Lista de asistencias");
 
         tablaLista.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         tablaLista.setModel(new javax.swing.table.DefaultTableModel(
@@ -108,8 +108,9 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
         etiquetaSeleccionarCurso.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         etiquetaSeleccionarCurso.setText("Seleccionar curso: ");
 
-        comboBoxCursos.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        comboBoxCursos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         comboBoxCursos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar curso" }));
+        comboBoxCursos.setPreferredSize(new java.awt.Dimension(675, 29));
 
         etiquetaSeleccionarFecha.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         etiquetaSeleccionarFecha.setText("Seleccionar fecha: ");
@@ -164,44 +165,42 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
             panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFondoLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelFondoLayout.createSequentialGroup()
-                        .addComponent(botonNuevoRegistro)
-                        .addGap(31, 31, 31)
-                        .addComponent(botonModificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botonGuardar)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonSalir)
-                        .addGap(31, 31, 31))
-                    .addGroup(panelFondoLayout.createSequentialGroup()
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(etiquetaTitulo, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelFondoLayout.createSequentialGroup()
+                        .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(etiquetaSeleccionarCurso)
+                            .addComponent(etiquetaSeleccionarFecha))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(scrollPanelTablaLista, javax.swing.GroupLayout.PREFERRED_SIZE, 896, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelFondoLayout.createSequentialGroup()
-                                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(etiquetaSeleccionarCurso)
-                                    .addComponent(etiquetaSeleccionarFecha))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelFondoLayout.createSequentialGroup()
-                                        .addComponent(campoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(botonBuscar))
-                                    .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(35, Short.MAX_VALUE))))
+                                .addComponent(campoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(botonBuscar))
+                            .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelFondoLayout.createSequentialGroup()
+                            .addComponent(botonNuevoRegistro)
+                            .addGap(31, 31, 31)
+                            .addComponent(botonModificar)
+                            .addGap(422, 422, 422)
+                            .addComponent(botonGuardar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(botonSalir))
+                        .addComponent(scrollPanelTablaLista, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 903, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         panelFondoLayout.setVerticalGroup(
             panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFondoLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel1)
+                .addComponent(etiquetaTitulo)
                 .addGap(25, 25, 25)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelFondoLayout.createSequentialGroup()
                         .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(etiquetaSeleccionarCurso)
-                            .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(etiquetaSeleccionarFecha)
@@ -211,22 +210,22 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
                 .addComponent(scrollPanelTablaLista, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonSalir)
                     .addComponent(botonGuardar)
                     .addComponent(botonModificar)
-                    .addComponent(botonNuevoRegistro))
-                .addContainerGap(33, Short.MAX_VALUE))
+                    .addComponent(botonNuevoRegistro)
+                    .addComponent(botonSalir))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelFondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelFondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -431,7 +430,7 @@ public class DlgMostrarListasAsistencias extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> comboBoxCursos;
     private javax.swing.JLabel etiquetaSeleccionarCurso;
     private javax.swing.JLabel etiquetaSeleccionarFecha;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel etiquetaTitulo;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JScrollPane scrollPanelTablaLista;
     private javax.swing.JTable tablaLista;

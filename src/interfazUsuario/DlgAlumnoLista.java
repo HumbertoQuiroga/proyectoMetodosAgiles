@@ -91,9 +91,9 @@ public class DlgAlumnoLista extends javax.swing.JDialog
         txtNombreCompleto.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtNombreCompleto.setPreferredSize(new java.awt.Dimension(260, 25));
 
-        comboEstadoAsistencia.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        comboEstadoAsistencia.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         comboEstadoAsistencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione estado de asistencia", "Asistio", "No Asistio" }));
-        comboEstadoAsistencia.setPreferredSize(new java.awt.Dimension(260, 25));
+        comboEstadoAsistencia.setPreferredSize(new java.awt.Dimension(260, 29));
         comboEstadoAsistencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboEstadoAsistenciaActionPerformed(evt);

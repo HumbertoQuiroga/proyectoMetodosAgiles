@@ -86,7 +86,8 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         panelFondo.setBackground(new java.awt.Color(240, 202, 171));
 
         txtSelectorArchivo.setEditable(false);
-        txtSelectorArchivo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        txtSelectorArchivo.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        txtSelectorArchivo.setPreferredSize(new java.awt.Dimension(470, 29));
         txtSelectorArchivo.setRequestFocusEnabled(false);
         txtSelectorArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -140,8 +141,9 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         etiquetaSeleccionarCurso.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         etiquetaSeleccionarCurso.setText("Seleccionar curso: ");
 
-        comboBoxCursos.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        comboBoxCursos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         comboBoxCursos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar curso" }));
+        comboBoxCursos.setPreferredSize(new java.awt.Dimension(141, 29));
         comboBoxCursos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxCursosActionPerformed(evt);
@@ -156,9 +158,9 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         etiquetaSeleccionarCurso1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         etiquetaSeleccionarCurso1.setText("Seleccionar curso: ");
 
-        comboBoxUnidad.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        comboBoxUnidad.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         comboBoxUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar unidad" }));
-        comboBoxUnidad.setPreferredSize(new java.awt.Dimension(155, 25));
+        comboBoxUnidad.setPreferredSize(new java.awt.Dimension(155, 29));
 
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
         panelFondo.setLayout(panelFondoLayout);
@@ -188,7 +190,7 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
                                     .addComponent(etiquetaSeleccionarCurso1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtSelectorArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+                                    .addComponent(txtSelectorArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(comboBoxCursos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(comboBoxUnidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -208,14 +210,14 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
                 .addGap(32, 32, 32)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etiquetaSeleccionarArchivo)
-                    .addComponent(txtSelectorArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSelectorArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonBuscarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etiquetaSeleccionarCurso)
-                    .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etiquetaSeleccionarCurso1)
                     .addComponent(comboBoxUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -254,6 +256,7 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         {
             if(comprobarArchivo(archivo.getName()))
             {
+                listaContenido.clear();
                 listaContenido = interpreteArchivo.importarArchivo(archivo);
                 if(listaContenido != null)
                 {
@@ -314,6 +317,7 @@ public class DlgAgregarAsistencia extends javax.swing.JDialog
         {
             if(comprobarArchivo(archivo.getName()))
             {
+                listaContenido.clear();
                 listaContenido = interpreteArchivo.importarArchivo(archivo);
                 if(listaContenido != null)
                 {

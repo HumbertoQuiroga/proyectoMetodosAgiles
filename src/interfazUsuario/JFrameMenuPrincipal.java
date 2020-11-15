@@ -476,11 +476,11 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void botonModificarAsistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarAsistenciasActionPerformed
-        DlgMostrarListasAsistencias modificarAsistencias = new DlgMostrarListasAsistencias(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo, ConstantesGUI.MODIFICAR);
+        DlgMostrarListasAsistenciasPorFecha modificarAsistencias = new DlgMostrarListasAsistenciasPorFecha(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo, ConstantesGUI.MODIFICAR);
     }//GEN-LAST:event_botonModificarAsistenciasActionPerformed
 
     private void etiquetaModificarAsistenciasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_etiquetaModificarAsistenciasMousePressed
-        DlgMostrarListasAsistencias modificarAsistencias = new DlgMostrarListasAsistencias(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo, ConstantesGUI.MODIFICAR);
+        DlgMostrarListasAsistenciasPorFecha modificarAsistencias = new DlgMostrarListasAsistenciasPorFecha(this, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepo, ConstantesGUI.MODIFICAR);
     }//GEN-LAST:event_etiquetaModificarAsistenciasMousePressed
 
     private void botonMostrarListasAsistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarListasAsistenciasActionPerformed

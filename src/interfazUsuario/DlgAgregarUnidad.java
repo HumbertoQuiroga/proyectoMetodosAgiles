@@ -83,11 +83,11 @@ public class DlgAgregarUnidad extends javax.swing.JDialog {
 
         etiquetaOpcional.setText("(Opcional)  ");
 
-        comboSeleccionarCurso.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        comboSeleccionarCurso.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         comboSeleccionarCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un curso" }));
-        comboSeleccionarCurso.setPreferredSize(new java.awt.Dimension(290, 25));
+        comboSeleccionarCurso.setPreferredSize(new java.awt.Dimension(290, 29));
 
-        txtIndice.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        txtIndice.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         txtIndice.setPreferredSize(new java.awt.Dimension(60, 25));
 
         txtNombre.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -169,7 +169,7 @@ public class DlgAgregarUnidad extends javax.swing.JDialog {
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonAgregar)
                     .addComponent(botonCancelar))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

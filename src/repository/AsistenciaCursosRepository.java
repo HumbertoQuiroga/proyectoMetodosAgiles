@@ -5,6 +5,7 @@
  */
 package repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -43,6 +44,27 @@ public class AsistenciaCursosRepository extends BaseRepository{
             Bson operacionActualizar = new Document("$set",valorListaAcualizada);
             database.getCollection(collectionName).updateOne(listaAsistenciasBuscada, operacionActualizar);
         }
+    }
+    
+    public List<Document> buscarListaAsistenciasPorUnidad(Document curso, Document unidad)
+    {
+        Document unidadesBuscada = new Document();
+        unidadesBuscada.append("curso", curso);
+        unidadesBuscada.append("unidad", unidad);
+        List<Document> listaUnidadesEncontrada = new ArrayList<>();
+        database.getCollection(collectionName).find(unidadesBuscada).into(listaUnidadesEncontrada);
+        if(listaUnidadesEncontrada.isEmpty()){return null;}
+        else{return listaUnidadesEncontrada;}
+    }
+    
+    public List<Document> buscarListaAsistenciasPorCurso(Document curso)
+    {
+        Document unidadesBuscada = new Document();
+        unidadesBuscada.append("curso", curso);
+        List<Document> listaUnidadesEncontrada = new ArrayList<>();
+        database.getCollection(collectionName).find(unidadesBuscada).into(listaUnidadesEncontrada);
+        if(listaUnidadesEncontrada.isEmpty()){return null;}
+        else{return listaUnidadesEncontrada;}
     }
     
 }

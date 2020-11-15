@@ -39,6 +39,7 @@ public class DlgMostrarUnidades extends javax.swing.JDialog
         this.cursosRepo = cursosRepo;
         this.unidadesRepoitory = unidadesRepoitory;
         this.llenarComboBoxCursos();
+        this.actualizarTablaCursos();
         this.setTitle("Mostrar Unidades");
         this.setVisible(true);
     }
@@ -89,9 +90,9 @@ public class DlgMostrarUnidades extends javax.swing.JDialog
             }
         });
 
-        comboSeleccionarCurso.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        comboSeleccionarCurso.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         comboSeleccionarCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un curso" }));
-        comboSeleccionarCurso.setPreferredSize(new java.awt.Dimension(290, 25));
+        comboSeleccionarCurso.setPreferredSize(new java.awt.Dimension(290, 29));
         comboSeleccionarCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboSeleccionarCursoActionPerformed(evt);
@@ -131,12 +132,12 @@ public class DlgMostrarUnidades extends javax.swing.JDialog
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etiquetaSeleccionarCurso)
-                    .addComponent(comboSeleccionarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboSeleccionarCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addComponent(ScrollPanelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(botonSalir)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -161,7 +162,7 @@ public class DlgMostrarUnidades extends javax.swing.JDialog
        {
            listaUnidades = unidadesRepoitory.buscarUnidades(extraerCurso());
            if(listaUnidades != null){actualizarTablaCursos();}
-           else{JOptionPane.showMessageDialog(this, "Error \n No se encontro ninguna unidad \n registrada en este curso!", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+           else{JOptionPane.showMessageDialog(null, "Error \n No se encontro ninguna unidad \n registrada en este curso!", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
        }
        else
        {

@@ -194,6 +194,9 @@
                   <Image iconType="3" name="/imagenes/porUnidad_icono.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="etiquetaPorUnidadMousePressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="botonPorUnidad">
               <Properties>
@@ -209,6 +212,9 @@
                   <Dimension value="[225, 80]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonPorUnidadActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -251,6 +257,9 @@
                   <Image iconType="3" name="/imagenes/cursos-iconoNaranja.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="etiquetaPorCursoMousePressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="botonPorCurso">
               <Properties>
@@ -266,6 +275,9 @@
                   <Dimension value="[225, 80]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonPorCursoActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -305,6 +317,9 @@
                   <Image iconType="3" name="/imagenes/porAlumno_icono.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="etiquetaPorAlumnoMousePressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="botonPorAlumno">
               <Properties>
@@ -320,6 +335,9 @@
                   <Dimension value="[225, 80]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonPorAlumnoActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

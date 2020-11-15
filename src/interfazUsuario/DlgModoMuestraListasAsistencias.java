@@ -110,12 +110,22 @@ public class DlgModoMuestraListasAsistencias extends javax.swing.JDialog {
         cajaPorUnidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         etiquetaPorUnidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/porUnidad_icono.png"))); // NOI18N
+        etiquetaPorUnidad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                etiquetaPorUnidadMousePressed(evt);
+            }
+        });
 
         botonPorUnidad.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         botonPorUnidad.setForeground(new java.awt.Color(255, 255, 255));
         botonPorUnidad.setText("Por unidad");
         botonPorUnidad.setContentAreaFilled(false);
         botonPorUnidad.setPreferredSize(new java.awt.Dimension(225, 80));
+        botonPorUnidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonPorUnidadActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout cajaPorUnidadLayout = new javax.swing.GroupLayout(cajaPorUnidad);
         cajaPorUnidad.setLayout(cajaPorUnidadLayout);
@@ -138,12 +148,22 @@ public class DlgModoMuestraListasAsistencias extends javax.swing.JDialog {
         cajaPorCurso.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         etiquetaPorCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cursos-iconoNaranja.png"))); // NOI18N
+        etiquetaPorCurso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                etiquetaPorCursoMousePressed(evt);
+            }
+        });
 
         botonPorCurso.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         botonPorCurso.setForeground(new java.awt.Color(255, 255, 255));
         botonPorCurso.setText("Por Curso");
         botonPorCurso.setContentAreaFilled(false);
         botonPorCurso.setPreferredSize(new java.awt.Dimension(225, 80));
+        botonPorCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonPorCursoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout cajaPorCursoLayout = new javax.swing.GroupLayout(cajaPorCurso);
         cajaPorCurso.setLayout(cajaPorCursoLayout);
@@ -166,12 +186,22 @@ public class DlgModoMuestraListasAsistencias extends javax.swing.JDialog {
         cajaPorAlumno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         etiquetaPorAlumno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/porAlumno_icono.png"))); // NOI18N
+        etiquetaPorAlumno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                etiquetaPorAlumnoMousePressed(evt);
+            }
+        });
 
         botonPorAlumno.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         botonPorAlumno.setForeground(new java.awt.Color(255, 255, 255));
         botonPorAlumno.setText("Por alumno");
         botonPorAlumno.setContentAreaFilled(false);
         botonPorAlumno.setPreferredSize(new java.awt.Dimension(225, 80));
+        botonPorAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonPorAlumnoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout cajaPorAlumnoLayout = new javax.swing.GroupLayout(cajaPorAlumno);
         cajaPorAlumno.setLayout(cajaPorAlumnoLayout);
@@ -274,12 +304,12 @@ public class DlgModoMuestraListasAsistencias extends javax.swing.JDialog {
 
     private void botonPorFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPorFechaActionPerformed
         dispose();
-        DlgMostrarListasAsistencias mostrarListaAsistencias = new DlgMostrarListasAsistencias(parent, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepository, ConstantesGUI.CONSULTAR);
+        DlgMostrarListasAsistenciasPorFecha mostrarListaAsistencias = new DlgMostrarListasAsistenciasPorFecha(parent, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepository, ConstantesGUI.CONSULTAR);
     }//GEN-LAST:event_botonPorFechaActionPerformed
 
     private void etiquetaPorFechaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_etiquetaPorFechaMousePressed
         dispose();
-        DlgMostrarListasAsistencias mostrarListaAsistencias = new DlgMostrarListasAsistencias(parent, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepository, ConstantesGUI.CONSULTAR);
+        DlgMostrarListasAsistenciasPorFecha mostrarListaAsistencias = new DlgMostrarListasAsistenciasPorFecha(parent, rootPaneCheckingEnabled, asistenciaCursosRepository, cursosRepository, ConstantesGUI.CONSULTAR);
     }//GEN-LAST:event_etiquetaPorFechaMousePressed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
@@ -289,6 +319,36 @@ public class DlgModoMuestraListasAsistencias extends javax.swing.JDialog {
     private void cajaSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cajaSalirMousePressed
         dispose();
     }//GEN-LAST:event_cajaSalirMousePressed
+
+    private void botonPorUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPorUnidadActionPerformed
+        dispose();
+        DlgMostrarListasAsistenciasPorUnidad mostrarListaAsistencias = new DlgMostrarListasAsistenciasPorUnidad(parent, rootPaneCheckingEnabled, cursosRepository, unidadRepository, asistenciaCursosRepository);
+    }//GEN-LAST:event_botonPorUnidadActionPerformed
+
+    private void botonPorCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPorCursoActionPerformed
+        dispose();
+        DlgMostrarListaAsistenciasPorCurso mostrarListaAsistencias = new DlgMostrarListaAsistenciasPorCurso(parent, rootPaneCheckingEnabled, cursosRepository, unidadRepository, asistenciaCursosRepository);
+    }//GEN-LAST:event_botonPorCursoActionPerformed
+
+    private void etiquetaPorUnidadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_etiquetaPorUnidadMousePressed
+        dispose();
+        DlgMostrarListasAsistenciasPorUnidad mostrarListaAsistencias = new DlgMostrarListasAsistenciasPorUnidad(parent, rootPaneCheckingEnabled, cursosRepository, unidadRepository, asistenciaCursosRepository);
+    }//GEN-LAST:event_etiquetaPorUnidadMousePressed
+
+    private void etiquetaPorCursoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_etiquetaPorCursoMousePressed
+        dispose();
+        DlgMostrarListaAsistenciasPorCurso mostrarListaAsistencias = new DlgMostrarListaAsistenciasPorCurso(parent, rootPaneCheckingEnabled, cursosRepository, unidadRepository, asistenciaCursosRepository);
+    }//GEN-LAST:event_etiquetaPorCursoMousePressed
+
+    private void botonPorAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPorAlumnoActionPerformed
+        dispose();
+        DlgMostrarListaAsistenciasPorAlumno mostrarListaAsistencias = new DlgMostrarListaAsistenciasPorAlumno(parent, rootPaneCheckingEnabled, cursosRepository, unidadRepository, asistenciaCursosRepository);
+    }//GEN-LAST:event_botonPorAlumnoActionPerformed
+
+    private void etiquetaPorAlumnoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_etiquetaPorAlumnoMousePressed
+        dispose();
+        DlgMostrarListaAsistenciasPorAlumno mostrarListaAsistencias = new DlgMostrarListaAsistenciasPorAlumno(parent, rootPaneCheckingEnabled, cursosRepository, unidadRepository, asistenciaCursosRepository);
+    }//GEN-LAST:event_etiquetaPorAlumnoMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
