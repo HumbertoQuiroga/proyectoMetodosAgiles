@@ -7,7 +7,9 @@ package interfazUsuario;
 
 import java.util.ArrayList;
 import org.bson.Document;
+import repository.AsistenciaCursosRepository;
 import repository.CursosRepository;
+import repository.UnidadesRepository;
 
 /**
  *
@@ -16,23 +18,52 @@ import repository.CursosRepository;
 public class DlgMostrarCursos extends javax.swing.JDialog 
 {
     private CursosRepository cursosRepo;
+    private ArrayList<Document> listaCursos;
+    private AsistenciaCursosRepository asistenciaCursosRepository;
+    private UnidadesRepository unidadesRepository;
+    /**
+     * Creates new form DlgMostrarCursos
+     * @param parent
+     * @param modal
+     * @param cursosRepo
+     * @param accion
+     */
+    public DlgMostrarCursos(java.awt.Frame parent, boolean modal, CursosRepository cursosRepo,int accion) 
+    {
+        super(parent, modal);
+        this.initComponents();
+        this.cursosRepo = cursosRepo;
+        this.listaCursos = new ArrayList<>();
+        this.actualizarTablaCursos();
+        if(accion == ConstantesGUI.MODIFICAR){configurarParaModificar();}
+        else{this.setTitle("Mostrar Cursos");}
+        this.setVisible(true);
+    }
+
     
     /**
      * Creates new form DlgMostrarCursos
      * @param parent
      * @param modal
      * @param cursosRepo
+     * @param asistenciaCursosRepository
+     * @param unidadesRepository
+     * @param accion
      */
-    public DlgMostrarCursos(java.awt.Frame parent, boolean modal, CursosRepository cursosRepo) 
+    public DlgMostrarCursos(java.awt.Frame parent, boolean modal, CursosRepository cursosRepo,AsistenciaCursosRepository asistenciaCursosRepository, UnidadesRepository unidadesRepository, int accion) 
     {
         super(parent, modal);
         this.initComponents();
         this.cursosRepo = cursosRepo;
+        this.unidadesRepository = unidadesRepository;
+        this.asistenciaCursosRepository = asistenciaCursosRepository;
+        this.listaCursos = new ArrayList<>();
         this.actualizarTablaCursos();
-        this.setTitle("Mostrar Cursos");
+        if(accion == ConstantesGUI.MODIFICAR){configurarParaModificar();}
+        else{this.setTitle("Mostrar Cursos");}
         this.setVisible(true);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,12 +78,19 @@ public class DlgMostrarCursos extends javax.swing.JDialog
         tablaCursos = new javax.swing.JTable();
         etiquetaTitulo = new javax.swing.JLabel();
         botonSalir = new javax.swing.JButton();
+        botonModificar = new javax.swing.JButton();
+        botonEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         panelFondo.setBackground(new java.awt.Color(240, 202, 171));
         panelFondo.setPreferredSize(new java.awt.Dimension(800, 500));
+        panelFondo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                panelFondoMousePressed(evt);
+            }
+        });
 
         tablaCursos.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         tablaCursos.setModel(new javax.swing.table.DefaultTableModel(
@@ -63,6 +101,12 @@ public class DlgMostrarCursos extends javax.swing.JDialog
 
             }
         ));
+        tablaCursos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaCursos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaCursosMousePressed(evt);
+            }
+        });
         ScrollPanelTabla.setViewportView(tablaCursos);
 
         etiquetaTitulo.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
@@ -76,6 +120,21 @@ public class DlgMostrarCursos extends javax.swing.JDialog
             }
         });
 
+        botonModificar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        botonModificar.setText("Modificar");
+        botonModificar.setEnabled(false);
+        botonModificar.setVisible(false);
+        botonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarActionPerformed(evt);
+            }
+        });
+
+        botonEliminar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        botonEliminar.setText("Eliminar");
+        botonEliminar.setEnabled(false);
+        botonEliminar.setVisible(false);
+
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
         panelFondo.setLayout(panelFondoLayout);
         panelFondoLayout.setHorizontalGroup(
@@ -86,9 +145,12 @@ public class DlgMostrarCursos extends javax.swing.JDialog
                     .addComponent(ScrollPanelTabla)
                     .addGroup(panelFondoLayout.createSequentialGroup()
                         .addComponent(etiquetaTitulo)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 294, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondoLayout.createSequentialGroup()
-                        .addGap(0, 697, Short.MAX_VALUE)
+                        .addComponent(botonModificar)
+                        .addGap(45, 45, 45)
+                        .addComponent(botonEliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(botonSalir)))
                 .addGap(25, 25, 25))
         );
@@ -97,10 +159,13 @@ public class DlgMostrarCursos extends javax.swing.JDialog
             .addGroup(panelFondoLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(etiquetaTitulo)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(ScrollPanelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(botonSalir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(ScrollPanelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonSalir)
+                    .addComponent(botonModificar)
+                    .addComponent(botonEliminar))
                 .addGap(20, 20, 20))
         );
 
@@ -119,16 +184,44 @@ public class DlgMostrarCursos extends javax.swing.JDialog
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+     private void configurarParaModificar()
+     {
+        this.setTitle("Menu modificar cursos");
+        this.botonModificar.setVisible(true);
+        this.botonEliminar.setVisible(true);
+     }
+     
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
+    private void tablaCursosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCursosMousePressed
+       if(tablaCursos.getSelectedRow() != -1)
+       {
+           botonModificar.setEnabled(true);
+       }
+    }//GEN-LAST:event_tablaCursosMousePressed
+
+    private void panelFondoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelFondoMousePressed
+       if(tablaCursos.getSelectedRow() != -1)
+       {
+           botonModificar.setEnabled(false);
+           tablaCursos.clearSelection();
+       }
+    }//GEN-LAST:event_panelFondoMousePressed
+
+    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
+       DlgAgregarCurso modificarCurso = new DlgAgregarCurso(null, rootPaneCheckingEnabled, cursosRepo, asistenciaCursosRepository, unidadesRepository ,listaCursos.get(tablaCursos.getSelectedRow()));
+       actualizarTablaCursos();
+       botonModificar.setEnabled(false);
+    }//GEN-LAST:event_botonModificarActionPerformed
+
     private void actualizarTablaCursos()
     {
-        ArrayList<Document> cursos = this.cursosRepo.buscarRegistrosEnLaColeccion();
+        listaCursos = this.cursosRepo.buscarRegistrosEnLaColeccion();
         
         tablaCursos.setModel(new javax.swing.table.DefaultTableModel(
-                setObjetosTablaCursos(cursos),
+                setObjetosTablaCursos(listaCursos),
             new String [] {"Nombre Curso", "Periodo", "Dias", "Hora"}
         ) {
             Class[] types = new Class [] {
@@ -170,6 +263,8 @@ public class DlgMostrarCursos extends javax.swing.JDialog
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollPanelTabla;
+    private javax.swing.JButton botonEliminar;
+    private javax.swing.JButton botonModificar;
     private javax.swing.JButton botonSalir;
     private javax.swing.JLabel etiquetaTitulo;
     private javax.swing.JPanel panelFondo;

@@ -187,7 +187,7 @@ public class DlgMostrarListasAsistenciasPorUnidad extends javax.swing.JDialog {
                 comboBoxUnidades.addItem("Seleccionar unidad");
                 listaAsistencia.clear();
                 actualizarTablaLista();
-                JOptionPane.showMessageDialog(null, "Error \n No se ha encontrado ningun registro!", "Mensaje Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error \n No se ha encontrado ninguna unidad registrada para este curso!", "Mensaje Error", JOptionPane.ERROR_MESSAGE);
             }
         }
         else

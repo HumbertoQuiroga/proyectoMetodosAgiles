@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumnModel;
 import org.bson.Document;
+import repository.AsistenciaCursosRepository;
 import repository.CursosRepository;
 import repository.UnidadesRepository;
 
@@ -20,9 +21,11 @@ import repository.UnidadesRepository;
 public class DlgMostrarUnidades extends javax.swing.JDialog 
 {
 
-    private UnidadesRepository unidadesRepoitory;
+    private UnidadesRepository unidadesRepository;
     private CursosRepository cursosRepo;
+    private AsistenciaCursosRepository asistenciaCursosRepository;
     private List<Document> listaUnidades;
+    private final int accion;
     
     
     /**
@@ -30,18 +33,31 @@ public class DlgMostrarUnidades extends javax.swing.JDialog
      * @param parent
      * @param modal
      * @param cursosRepo
-     * @param unidadesRepoitory
+     * @param unidadesRepository
+     * @param asistenciaCursosRepository
+     * @param accion
      */
-    public DlgMostrarUnidades(java.awt.Frame parent, boolean modal, CursosRepository cursosRepo, UnidadesRepository unidadesRepoitory)
+    public DlgMostrarUnidades(java.awt.Frame parent, boolean modal, CursosRepository cursosRepo, UnidadesRepository unidadesRepository,AsistenciaCursosRepository asistenciaCursosRepository, int accion)
     {
         super(parent, modal);
         this.initComponents();
+        this.listaUnidades = new ArrayList<>();
         this.cursosRepo = cursosRepo;
-        this.unidadesRepoitory = unidadesRepoitory;
+        this.unidadesRepository = unidadesRepository;
+        this.asistenciaCursosRepository = asistenciaCursosRepository;
         this.llenarComboBoxCursos();
-        this.actualizarTablaCursos();
-        this.setTitle("Mostrar Unidades");
+        this.actualizarTablaUnidades();
+        if(accion == ConstantesGUI.MODIFICAR){configurarParaModificar();}
+        else{this.setTitle("Mostrar Unidades");}
         this.setVisible(true);
+        this.accion = accion;
+    }
+    
+    
+    private void configurarParaModificar()
+    {
+        this.setTitle("Modificar Unidades");
+        this.botonModificarUnidad.setVisible(true);
     }
 
     /**
@@ -60,6 +76,7 @@ public class DlgMostrarUnidades extends javax.swing.JDialog
         botonSalir = new javax.swing.JButton();
         comboSeleccionarCurso = new javax.swing.JComboBox<>();
         etiquetaSeleccionarCurso = new javax.swing.JLabel();
+        botonModificarUnidad = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(808, 580));
@@ -67,6 +84,11 @@ public class DlgMostrarUnidades extends javax.swing.JDialog
 
         panelFondo.setBackground(new java.awt.Color(240, 202, 171));
         panelFondo.setPreferredSize(new java.awt.Dimension(800, 580));
+        panelFondo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                panelFondoMousePressed(evt);
+            }
+        });
 
         etiquetaTitulo.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         etiquetaTitulo.setText("Lista de unidades registradas");
@@ -80,6 +102,12 @@ public class DlgMostrarUnidades extends javax.swing.JDialog
 
             }
         ));
+        tablaUnidades.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaUnidades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaUnidadesMousePressed(evt);
+            }
+        });
         ScrollPanelTabla.setViewportView(tablaUnidades);
 
         botonSalir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -93,6 +121,11 @@ public class DlgMostrarUnidades extends javax.swing.JDialog
         comboSeleccionarCurso.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         comboSeleccionarCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un curso" }));
         comboSeleccionarCurso.setPreferredSize(new java.awt.Dimension(290, 29));
+        comboSeleccionarCurso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                comboSeleccionarCursoMousePressed(evt);
+            }
+        });
         comboSeleccionarCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboSeleccionarCursoActionPerformed(evt);
@@ -102,26 +135,33 @@ public class DlgMostrarUnidades extends javax.swing.JDialog
         etiquetaSeleccionarCurso.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         etiquetaSeleccionarCurso.setText("Seleccionar curso: ");
 
+        botonModificarUnidad.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        botonModificarUnidad.setText("Modificar");
+        botonModificarUnidad.setEnabled(false);
+        botonModificarUnidad.setVisible(false);
+        botonModificarUnidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarUnidadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
         panelFondo.setLayout(panelFondoLayout);
         panelFondoLayout.setHorizontalGroup(
             panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondoLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelFondoLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonModificarUnidad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(botonSalir))
-                    .addGroup(panelFondoLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ScrollPanelTabla)
-                            .addGroup(panelFondoLayout.createSequentialGroup()
-                                .addComponent(etiquetaTitulo)
-                                .addGap(0, 247, Short.MAX_VALUE))
-                            .addGroup(panelFondoLayout.createSequentialGroup()
-                                .addComponent(etiquetaSeleccionarCurso)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboSeleccionarCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addComponent(ScrollPanelTabla, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
+                    .addComponent(etiquetaTitulo, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelFondoLayout.createSequentialGroup()
+                        .addComponent(etiquetaSeleccionarCurso)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboSeleccionarCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(25, 25, 25))
         );
         panelFondoLayout.setVerticalGroup(
@@ -134,10 +174,16 @@ public class DlgMostrarUnidades extends javax.swing.JDialog
                     .addComponent(etiquetaSeleccionarCurso)
                     .addComponent(comboSeleccionarCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
-                .addComponent(ScrollPanelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(botonSalir)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(ScrollPanelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelFondoLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(botonSalir)
+                        .addContainerGap(36, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonModificarUnidad)
+                        .addGap(22, 22, 22))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -157,23 +203,68 @@ public class DlgMostrarUnidades extends javax.swing.JDialog
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private void actualizarLista()
+    {
+        List<Document> listaUnidadesAux = unidadesRepository.buscarUnidades(extraerCurso());
+           if(listaUnidadesAux != null)
+           {
+               listaUnidades = listaUnidadesAux;
+               ordenarListaUnidades();
+               actualizarTablaUnidades();
+           }
+           else
+           {
+               listaUnidades.clear();
+               actualizarTablaUnidades();
+               JOptionPane.showMessageDialog(null, "Error \n No se encontro ninguna unidad registrada para este curso!", "Mensaje Error", JOptionPane.ERROR_MESSAGE);
+           }
+    }
+    
     private void comboSeleccionarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSeleccionarCursoActionPerformed
        if(comboSeleccionarCurso.getSelectedIndex()!=0)
        {
-           listaUnidades = unidadesRepoitory.buscarUnidades(extraerCurso());
-           if(listaUnidades != null){actualizarTablaCursos();}
-           else{JOptionPane.showMessageDialog(null, "Error \n No se encontro ninguna unidad \n registrada en este curso!", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+           actualizarLista();
        }
        else
        {
-          listaUnidades = new ArrayList<>();
-          actualizarTablaCursos();
+          listaUnidades.clear();
+          actualizarTablaUnidades();
        }
     }//GEN-LAST:event_comboSeleccionarCursoActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
+
+    private void tablaUnidadesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaUnidadesMousePressed
+       if(tablaUnidades.getSelectedRow() != -1)
+       {
+           botonModificarUnidad.setEnabled(true);
+       }
+    }//GEN-LAST:event_tablaUnidadesMousePressed
+
+    private void panelFondoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelFondoMousePressed
+       if(tablaUnidades.getSelectedRow() != -1)
+       {
+           botonModificarUnidad.setEnabled(false);
+           tablaUnidades.clearSelection();
+       }
+    }//GEN-LAST:event_panelFondoMousePressed
+
+    private void botonModificarUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarUnidadActionPerformed
+       DlgAgregarUnidad modificarUnidad = new DlgAgregarUnidad(null, rootPaneCheckingEnabled, cursosRepo, unidadesRepository, asistenciaCursosRepository ,listaUnidades.get(tablaUnidades.getSelectedRow()));
+       actualizarLista();
+       botonModificarUnidad.setEnabled(false);
+    }//GEN-LAST:event_botonModificarUnidadActionPerformed
+
+    private void comboSeleccionarCursoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboSeleccionarCursoMousePressed
+        if(tablaUnidades.getSelectedRow() != -1)
+       {
+           botonModificarUnidad.setEnabled(false);
+           tablaUnidades.clearSelection();
+       }
+    }//GEN-LAST:event_comboSeleccionarCursoMousePressed
 
     private Document extraerCurso()
     {
@@ -199,7 +290,7 @@ public class DlgMostrarUnidades extends javax.swing.JDialog
        }
     }
     
-    private void actualizarTablaCursos()
+    private void actualizarTablaUnidades()
     {
         tablaUnidades.setModel(new javax.swing.table.DefaultTableModel(
                 setObjetosTablaUnidades(listaUnidades),
@@ -232,29 +323,38 @@ public class DlgMostrarUnidades extends javax.swing.JDialog
         
     }
     
+    
+    private void ordenarListaUnidades()
+    {
+      if(listaUnidades != null)
+      {
+        Document aux;
+        for(int cont = 0 ; cont < listaUnidades.size()-1 ;cont++)
+        {
+            for(int cont2 =0; cont2 < listaUnidades.size()-1; cont2++)
+            {
+               if(Integer.valueOf(listaUnidades.get(cont2).getString("indice")) > Integer.valueOf(listaUnidades.get(cont2+1).getString("indice")))
+               {
+                   aux = listaUnidades.get(cont2);
+                   listaUnidades.set(cont2, listaUnidades.get(cont2+1));
+                   listaUnidades.set(cont2+1,aux);
+               }
+            }
+        }
+      }
+    }
+    
+    
     private Object[][] setObjetosTablaUnidades(List<Document> unidades)
     {
       if(unidades != null)
-      {  
+      {
         Object[][] unidadesTabla = new Object[unidades.size()][3];
         for(int cont=0; cont < unidades.size() ;cont++)
         {
-            int indice = Integer.valueOf(unidades.get(cont).getString("indice"));
-            int pos=0;
-            for(int cont2=0 ; cont2 < unidades.size() ;cont2++)
-            {
-                int indice2 = Integer.valueOf(unidades.get(cont2).getString("indice"));
-                if(indice != indice2)
-                {
-                    if(indice > indice2)
-                    {
-                        pos = pos+1;
-                    }
-                }
-            }
-            unidadesTabla[pos][0] = unidades.get(cont).getString("indice");
-            unidadesTabla[pos][1] = unidades.get(cont).getString("nombre");
-            unidadesTabla[pos][2] = unidades.get(cont).getString("descripcion");
+           unidadesTabla[cont][0] = unidades.get(cont).getString("indice");
+           unidadesTabla[cont][1] = unidades.get(cont).getString("nombre");
+           unidadesTabla[cont][2] = unidades.get(cont).getString("descripcion");
         }
         return unidadesTabla;
       }
@@ -266,6 +366,7 @@ public class DlgMostrarUnidades extends javax.swing.JDialog
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollPanelTabla;
+    private javax.swing.JButton botonModificarUnidad;
     private javax.swing.JButton botonSalir;
     private javax.swing.JComboBox<String> comboSeleccionarCurso;
     private javax.swing.JLabel etiquetaSeleccionarCurso;

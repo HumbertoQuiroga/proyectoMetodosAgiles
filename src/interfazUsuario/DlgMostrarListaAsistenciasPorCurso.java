@@ -5,9 +5,13 @@
  */
 package interfazUsuario;
 
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 import org.bson.Document;
 import repository.*;
 
@@ -70,8 +74,10 @@ public class DlgMostrarListaAsistenciasPorCurso extends javax.swing.JDialog {
         etiquetaTitulo.setText("Lista de asistencias");
 
         comboBoxCursos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        comboBoxCursos.setMaximumRowCount(100);
         comboBoxCursos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar curso" }));
-        comboBoxCursos.setPreferredSize(new java.awt.Dimension(141, 29));
+        comboBoxCursos.setBorder(null);
+        comboBoxCursos.setPreferredSize(new java.awt.Dimension(600, 29));
         comboBoxCursos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxCursosActionPerformed(evt);
@@ -118,7 +124,7 @@ public class DlgMostrarListaAsistenciasPorCurso extends javax.swing.JDialog {
                         .addGroup(panelFondoLayout.createSequentialGroup()
                             .addComponent(etiquetaSeleccionarCurso)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         panelFondoLayout.setVerticalGroup(
@@ -167,7 +173,7 @@ public class DlgMostrarListaAsistenciasPorCurso extends javax.swing.JDialog {
     }//GEN-LAST:event_comboBoxCursosActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        dispose();
+       dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void extraerListaConListaAsistencias()

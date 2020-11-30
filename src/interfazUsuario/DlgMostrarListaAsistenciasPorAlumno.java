@@ -243,6 +243,8 @@ public class DlgMostrarListaAsistenciasPorAlumno extends javax.swing.JDialog {
                     txtNombre.setText(nombreAlumno);
                     if(nombreAlumno.equals(listaAsistencia.get(cont2).getString("nombre")))
                     {
+                      if(!listaAsistencia.get(cont2).getString("horaEntrada").isEmpty())
+                      {
                         Document datosAlumno = new Document();
                         Document datosUnidad = (Document)listaConAsistenicas.get(cont).get("unidad");
                         datosAlumno.append("indiceUnidad",datosUnidad.get("indice"));
@@ -251,6 +253,7 @@ public class DlgMostrarListaAsistenciasPorAlumno extends javax.swing.JDialog {
                         datosAlumno.append("horaEntrada", listaAsistencia.get(cont2).get("horaEntrada"));
                         datosAlumno.append("minutosTotales", listaAsistencia.get(cont2).get("minutosTotales"));
                         listaDatosAlumno.add(datosAlumno);
+                      }
                     }
                     
                 }

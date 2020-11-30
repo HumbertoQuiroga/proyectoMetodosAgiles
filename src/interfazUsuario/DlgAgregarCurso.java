@@ -7,7 +7,8 @@ package interfazUsuario;
 
 import javax.swing.JOptionPane;
 import org.bson.Document;
-import repository.CursosRepository;
+import repository.*;
+
 
 /**
  *
@@ -17,7 +18,10 @@ public class DlgAgregarCurso extends javax.swing.JDialog
 {
     private String[] dias = new String[7];
     private String nombreDias;
+    private Document curso;
     private CursosRepository cursosRepo;
+    private UnidadesRepository unidadesRepository;
+    private AsistenciaCursosRepository asistenciaCursosRepository;
     
     /**
      * Creates new form DlgAgregarCurso
@@ -33,6 +37,31 @@ public class DlgAgregarCurso extends javax.swing.JDialog
         this.setTitle("Agregar Curso");
         this.setVisible(true);
     }
+    
+    public DlgAgregarCurso(java.awt.Frame parent, boolean modal, CursosRepository cursosRepo,AsistenciaCursosRepository asistenciaCursosRepository, UnidadesRepository unidadesRepository, Document curso) 
+    {
+        super(parent, modal);
+        this.initComponents();
+        this.cursosRepo = cursosRepo;
+        this.unidadesRepository = unidadesRepository;
+        this.asistenciaCursosRepository = asistenciaCursosRepository;
+        this.curso = curso;
+        this.setTitle("Modificar Curso");
+        this.etiquetaTitulo.setText("Modificar Curso");
+        this.botonAgregarCurso.setText("Actualizar");
+        this.setValoresCurso();
+        this.setVisible(true);
+    }
+    
+    private void setValoresCurso()
+    {
+        this.txtNombre.setText(curso.getString("nombre"));
+        this.comboPeriodo.setSelectedItem(curso.getString("periodo"));
+        this.txtDias.setText(curso.getString("dias"));
+        extraerDias(curso.getString("dias"));
+        this.txtHora.setText(curso.getString("hora"));
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -293,6 +322,42 @@ public class DlgAgregarCurso extends javax.swing.JDialog
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void extraerDias(String diasString)
+    {
+        int cantDias = (diasString.length()/2);
+        int inicio = 0,fin = 2;
+        if(diasString.contains("Lu"))
+        {
+            checkLunes.setSelected(true);
+        }
+        if(diasString.contains("Ma"))
+        {
+            checkMartes.setSelected(true);
+        }
+        if(diasString.contains("Mi"))
+        {
+            checkMiercoles.setSelected(true);
+        }
+        if(diasString.contains("Ju"))
+        {
+            checkJueves.setSelected(true);
+        }
+        if(diasString.contains("Vi"))
+        {
+            checkViernes.setSelected(true);
+        }
+        if(diasString.contains("Sa"))
+        {
+            checkSabado.setSelected(true);
+        }
+        if(diasString.contains("Do"))
+        {
+            checkDomingo.setSelected(true);
+        }
+        
+    }
+    
+    
     private void botonAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarCursoActionPerformed
         if(validarCampos())
         {
@@ -303,11 +368,22 @@ public class DlgAgregarCurso extends javax.swing.JDialog
               documento.append("hora", validarHora(txtHora.getText()));
               if(comprobarSiElCursoExiste(documento)!=true)
               {
+                 if(botonAgregarCurso.getText().equals("Agregar"))
+                 {  
                   cursosRepo.agregarDoumento(documento);
                   JOptionPane.showMessageDialog(this, "El curso se agrego correctamente!", "Mensaje Aviso", JOptionPane.INFORMATION_MESSAGE);
+                 }
+                 else
+                 {
+                     cursosRepo.actualizarCurso(curso,documento);
+                     asistenciaCursosRepository.actualizarCursos(curso, documento);
+                     unidadesRepository.actualizarCursos(curso, documento);
+                     JOptionPane.showMessageDialog(this, "El curso se actualizo correctamente!", "Mensaje Aviso", JOptionPane.INFORMATION_MESSAGE);
+                 }
                   dispose();
               }else{JOptionPane.showMessageDialog(this, "Error! \n Este curso ya fue registrado", "Mensaje Error", JOptionPane.ERROR_MESSAGE);}
         }
+     
     }//GEN-LAST:event_botonAgregarCursoActionPerformed
 
     private boolean validarCampos()

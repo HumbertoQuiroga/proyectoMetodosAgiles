@@ -8,6 +8,7 @@ package repository;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 /**
  *
@@ -38,6 +39,42 @@ public class UnidadesRepository extends BaseRepository{
         database.getCollection(collectionName).find(unidadesBuscada).into(listaUnidadesEncontrada);
         if(listaUnidadesEncontrada.isEmpty()){return null;}
         else{return listaUnidadesEncontrada;}
+    }
+    
+    public void actualizarCursos(Document cursoAntiguo, Document cursoNuevo)
+    {
+        Document cursoAntiguo2 = new Document();
+        cursoAntiguo2.append("nombre", cursoAntiguo.getString("nombre"));
+        cursoAntiguo2.append("periodo", cursoAntiguo.getString("periodo"));
+        cursoAntiguo2.append("dias", cursoAntiguo.getString("dias"));
+        cursoAntiguo2.append("hora", cursoAntiguo.getString("hora"));
+        
+        List<Document> listaUnidadesCurso = new ArrayList<>();
+        database.getCollection(collectionName).find(new Document("curso", cursoAntiguo2)).into(listaUnidadesCurso);
+        
+        if(!listaUnidadesCurso.isEmpty())
+        {
+            for(int cont = 0; cont < listaUnidadesCurso.size() ;cont++)
+            {
+                Bson valorCursoAcualizado = new Document("curso", cursoNuevo);
+                Bson operacionActualizar = new Document("$set",valorCursoAcualizado);
+                database.getCollection(collectionName).updateOne(listaUnidadesCurso.get(cont), operacionActualizar);
+            }
+        }
+    }
+    
+    public boolean actualizarUnidad(Document unidadAntigua, Document unidadNueva)
+    {
+        try {
+            Bson valorUnidadAcualizada = new Document(unidadNueva);
+            Bson operacionActualizar = new Document("$set",valorUnidadAcualizada);
+            database.getCollection(collectionName).updateOne(unidadAntigua, operacionActualizar);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error al actualizar documento en: " + this.collectionName);
+            System.err.println(e.getMessage());
+            return false;
+        }
     }
     
 }

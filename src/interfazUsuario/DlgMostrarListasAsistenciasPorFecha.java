@@ -5,8 +5,10 @@
  */
 package interfazUsuario;
 
+import com.toedter.calendar.JDateChooser;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import objetosNegocio.MiRender;
@@ -65,11 +67,12 @@ public class DlgMostrarListasAsistenciasPorFecha extends javax.swing.JDialog {
         comboBoxCursos = new javax.swing.JComboBox<>();
         campoFecha = new com.toedter.calendar.JDateChooser();
         etiquetaSeleccionarFecha = new javax.swing.JLabel();
-        botonBuscar = new javax.swing.JButton();
         botonSalir = new javax.swing.JButton();
         botonGuardar = new javax.swing.JButton();
         botonModificar = new javax.swing.JButton();
         botonNuevoRegistro = new javax.swing.JButton();
+        panelBotonBuscar = new javax.swing.JPanel();
+        botonBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -111,20 +114,24 @@ public class DlgMostrarListasAsistenciasPorFecha extends javax.swing.JDialog {
         comboBoxCursos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         comboBoxCursos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar curso" }));
         comboBoxCursos.setPreferredSize(new java.awt.Dimension(675, 29));
+        comboBoxCursos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboBoxCursosItemStateChanged(evt);
+            }
+        });
+        comboBoxCursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxCursosActionPerformed(evt);
+            }
+        });
+
+        campoFecha.setEnabled(false);
 
         etiquetaSeleccionarFecha.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         etiquetaSeleccionarFecha.setText("Seleccionar fecha: ");
 
-        botonBuscar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        botonBuscar.setText("Buscar");
-        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonBuscarActionPerformed(evt);
-            }
-        });
-
         botonSalir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        botonSalir.setText("Cancelar");
+        botonSalir.setText("Salir");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSalirActionPerformed(evt);
@@ -152,12 +159,50 @@ public class DlgMostrarListasAsistenciasPorFecha extends javax.swing.JDialog {
 
         botonNuevoRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         botonNuevoRegistro.setText("Nuevo registro");
+        botonNuevoRegistro.setEnabled(false);
         botonNuevoRegistro.setVisible(false);
         botonNuevoRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonNuevoRegistroActionPerformed(evt);
             }
         });
+
+        panelBotonBuscar.setBackground(new java.awt.Color(69, 109, 252));
+        panelBotonBuscar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelBotonBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                panelBotonBuscarMousePressed(evt);
+            }
+        });
+
+        botonBuscar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        botonBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        botonBuscar.setText("Buscar");
+        botonBuscar.setBorderPainted(false);
+        botonBuscar.setContentAreaFilled(false);
+        botonBuscar.setFocusPainted(false);
+        botonBuscar.setFocusable(false);
+        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelBotonBuscarLayout = new javax.swing.GroupLayout(panelBotonBuscar);
+        panelBotonBuscar.setLayout(panelBotonBuscarLayout);
+        panelBotonBuscarLayout.setHorizontalGroup(
+            panelBotonBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonBuscarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonBuscar)
+                .addContainerGap())
+        );
+        panelBotonBuscarLayout.setVerticalGroup(
+            panelBotonBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonBuscarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonBuscar))
+        );
 
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
         panelFondo.setLayout(panelFondoLayout);
@@ -166,29 +211,33 @@ public class DlgMostrarListasAsistenciasPorFecha extends javax.swing.JDialog {
             .addGroup(panelFondoLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(etiquetaTitulo, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelFondoLayout.createSequentialGroup()
-                        .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(etiquetaSeleccionarCurso)
-                            .addComponent(etiquetaSeleccionarFecha))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(panelFondoLayout.createSequentialGroup()
+                        .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelFondoLayout.createSequentialGroup()
+                                .addComponent(botonNuevoRegistro)
+                                .addGap(31, 31, 31)
+                                .addComponent(botonModificar)
+                                .addGap(422, 422, 422)
+                                .addComponent(botonGuardar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonSalir))
+                            .addComponent(scrollPanelTablaLista, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 903, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelFondoLayout.createSequentialGroup()
                         .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(etiquetaTitulo)
                             .addGroup(panelFondoLayout.createSequentialGroup()
-                                .addComponent(campoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(botonBuscar))
-                            .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelFondoLayout.createSequentialGroup()
-                            .addComponent(botonNuevoRegistro)
-                            .addGap(31, 31, 31)
-                            .addComponent(botonModificar)
-                            .addGap(422, 422, 422)
-                            .addComponent(botonGuardar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonSalir))
-                        .addComponent(scrollPanelTablaLista, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 903, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(etiquetaSeleccionarCurso)
+                                    .addComponent(etiquetaSeleccionarFecha))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panelFondoLayout.createSequentialGroup()
+                                        .addComponent(campoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(panelBotonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(126, 126, 126))))
         );
         panelFondoLayout.setVerticalGroup(
             panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,16 +245,15 @@ public class DlgMostrarListasAsistenciasPorFecha extends javax.swing.JDialog {
                 .addGap(21, 21, 21)
                 .addComponent(etiquetaTitulo)
                 .addGap(25, 25, 25)
-                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelFondoLayout.createSequentialGroup()
-                        .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(etiquetaSeleccionarCurso)
-                            .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(etiquetaSeleccionarFecha)
-                            .addComponent(campoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(botonBuscar))
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiquetaSeleccionarCurso)
+                    .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(etiquetaSeleccionarFecha)
+                        .addComponent(campoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelBotonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addComponent(scrollPanelTablaLista, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -214,7 +262,7 @@ public class DlgMostrarListasAsistenciasPorFecha extends javax.swing.JDialog {
                     .addComponent(botonModificar)
                     .addComponent(botonNuevoRegistro)
                     .addComponent(botonSalir))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -235,37 +283,12 @@ public class DlgMostrarListasAsistenciasPorFecha extends javax.swing.JDialog {
     private void configurarParaModificar()
     {
         this.setTitle("Menu modificar lista asistencias");
-        this.botonSalir.setText("Cancelar");
+        this.botonSalir.setText("Salir");
         this.botonGuardar.setVisible(true);
         this.botonNuevoRegistro.setVisible(true);
         this.botonModificar.setVisible(true);
     }
     
-    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
-       if(comprobarCampos())
-       {
-            if(asistenciaCursosRepository.buscarListaAsistencias(extraerCurso(), convertirFechaToString())!=null)
-            {
-               listaContenido = (List<Document>) asistenciaCursosRepository.buscarListaAsistencias(extraerCurso(), convertirFechaToString()).get("listaAsistencia");
-               actualizarTablaLista();
-            }
-            else
-            {
-                if(!botonNuevoRegistro.isVisible())
-                {
-                    JOptionPane.showMessageDialog(this, "No se encontro ningun registro en el curso,\n "
-                    +"Nombre:"+extraerCurso().getString("nombre")+", Periodo:"+extraerCurso().getString("periodo")+", Dias:"+extraerCurso().getString("dias")+", Hora:"+extraerCurso().getString("hora")
-                    +",\n en la fecha: "+convertirFechaToString()+"\n Compruebe si los datos son correctos!", "Mensaje Aviso", JOptionPane.INFORMATION_MESSAGE);
-                }
-                else
-                {
-                    listaContenido.clear();
-                    actualizarTablaLista();
-                }
-            }
-       }
-    }//GEN-LAST:event_botonBuscarActionPerformed
-
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
@@ -321,6 +344,68 @@ public class DlgMostrarListasAsistenciasPorFecha extends javax.swing.JDialog {
        }
     }//GEN-LAST:event_panelFondoMousePressed
 
+    private void comboBoxCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxCursosActionPerformed
+        if(comboBoxCursos.getSelectedIndex() != 0)
+        {
+            this.campoFecha.setEnabled(true);
+            campoFecha.setCalendar(null);
+        }
+        else
+        {
+            this.campoFecha.setEnabled(false);
+        }
+    }//GEN-LAST:event_comboBoxCursosActionPerformed
+
+    private void comboBoxCursosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxCursosItemStateChanged
+       campoFecha.setCalendar(null);
+       listaContenido.clear();
+       actualizarTablaLista();
+    }//GEN-LAST:event_comboBoxCursosItemStateChanged
+
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
+            if(comprobarCampos())
+            {
+                if(asistenciaCursosRepository.buscarListaAsistencias(extraerCurso(), convertirFechaToString())!=null)
+                {
+                    botonNuevoRegistro.setEnabled(true);
+                    listaContenido = (List<Document>) asistenciaCursosRepository.buscarListaAsistencias(extraerCurso(), convertirFechaToString()).get("listaAsistencia");
+                    actualizarTablaLista();
+                }
+                else
+                {
+                    botonNuevoRegistro.setEnabled(false);
+                    listaContenido.clear();
+                    actualizarTablaLista();
+                    JOptionPane.showMessageDialog(this, "No se encontro ningun registro en el curso,\n "
+                            +"Nombre:"+extraerCurso().getString("nombre")+", Periodo:"+extraerCurso().getString("periodo")+", Dias:"+extraerCurso().getString("dias")+", Hora:"+extraerCurso().getString("hora")
+                            +",\n en la fecha: "+convertirFechaToString()+"\n Compruebe si los datos son correctos!", "Mensaje Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    
+                }
+            }
+    }//GEN-LAST:event_botonBuscarActionPerformed
+
+    private void panelBotonBuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBotonBuscarMousePressed
+           if(comprobarCampos())
+            {
+                if(asistenciaCursosRepository.buscarListaAsistencias(extraerCurso(), convertirFechaToString())!=null)
+                {
+                    botonNuevoRegistro.setEnabled(true);
+                    listaContenido = (List<Document>) asistenciaCursosRepository.buscarListaAsistencias(extraerCurso(), convertirFechaToString()).get("listaAsistencia");
+                    actualizarTablaLista();
+                }
+                else
+                {
+                    botonNuevoRegistro.setEnabled(true);
+                    listaContenido.clear();
+                    actualizarTablaLista();
+                    JOptionPane.showMessageDialog(this, "No se encontro ningun registro en el curso,\n "
+                            +"Nombre:"+extraerCurso().getString("nombre")+", Periodo:"+extraerCurso().getString("periodo")+", Dias:"+extraerCurso().getString("dias")+", Hora:"+extraerCurso().getString("hora")
+                            +",\n en la fecha: "+convertirFechaToString()+"\n Compruebe si los datos son correctos!", "Mensaje Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    
+                }
+            }
+    }//GEN-LAST:event_panelBotonBuscarMousePressed
+
    
     private Object[][] convertirListaAsistenciasAObjetos()
     {
@@ -365,7 +450,7 @@ public class DlgMostrarListasAsistenciasPorFecha extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Error! \n No se ha seleccionado ningun curso", "Mensaje Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        else if(campoFecha.getCalendar()==null)
+         else if(campoFecha.getCalendar()==null)
         {
             JOptionPane.showMessageDialog(this, "Error! \n No se ha ingresado ninguna fecha", "Mensaje Error", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -431,6 +516,8 @@ public class DlgMostrarListasAsistenciasPorFecha extends javax.swing.JDialog {
     private javax.swing.JLabel etiquetaSeleccionarCurso;
     private javax.swing.JLabel etiquetaSeleccionarFecha;
     private javax.swing.JLabel etiquetaTitulo;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel panelBotonBuscar;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JScrollPane scrollPanelTablaLista;
     private javax.swing.JTable tablaLista;

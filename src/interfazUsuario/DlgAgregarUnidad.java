@@ -6,8 +6,10 @@
 package interfazUsuario;
 
 import java.util.List;
+import java.util.Objects;
 import javax.swing.JOptionPane;
 import org.bson.Document;
+import repository.AsistenciaCursosRepository;
 import repository.CursosRepository;
 import repository.UnidadesRepository;
 
@@ -17,14 +19,17 @@ import repository.UnidadesRepository;
  */
 public class DlgAgregarUnidad extends javax.swing.JDialog {
 
+    private Document unidad;
     private CursosRepository cursosRepo;
     private UnidadesRepository unidadesRepository;
+    private AsistenciaCursosRepository asistenciaCursosRepository;
     
     /**
      * Creates new form DlgAgregarUnidad
      * @param parent
      * @param modal
      * @param cursosRepo
+     * @param unidadesRepository
      */
     public DlgAgregarUnidad(java.awt.Frame parent, boolean modal, CursosRepository cursosRepo,UnidadesRepository unidadesRepository) 
     {
@@ -36,6 +41,51 @@ public class DlgAgregarUnidad extends javax.swing.JDialog {
         this.llenarComboBoxCursos();
         this.setVisible(true);
     }
+    
+    
+    /**
+     * Creates new form DlgAgregarUnidad
+     * @param parent
+     * @param modal
+     * @param cursosRepo
+     * @param unidadesRepository
+     * @param asistenciaCursosRepository
+     * @param unidad
+     */
+    public DlgAgregarUnidad(java.awt.Frame parent, boolean modal, CursosRepository cursosRepo,UnidadesRepository unidadesRepository,AsistenciaCursosRepository asistenciaCursosRepository, Document unidad) 
+    {
+        super(parent, modal);
+        this.initComponents();
+        this.cursosRepo = cursosRepo;
+        this.unidadesRepository = unidadesRepository;
+        this.asistenciaCursosRepository = asistenciaCursosRepository;
+        this.llenarComboBoxCursos();
+        this.unidad = unidad;
+        this.configurarParaModificarUnidad();
+        this.setVisible(true);
+    }
+    
+    private void configurarParaModificarUnidad()
+    {
+        this.setTitle("Modificar Unidad");
+        this.etiquetaTitulo.setText("Modificar unidad de competencia");
+        this.setValoresUnidad();
+        this.botonAgregar.setText("Actualizar");
+    }
+    
+    private void setValoresUnidad()
+    {
+        Document curso = (Document) unidad.get("curso");
+        this.comboSeleccionarCurso.setSelectedItem("Nombre: "+curso.getString("nombre")+
+                                                 ", Periodo: "+curso.getString("periodo")+
+                                                 ", Dias: "+curso.getString("dias")+
+                                                 ", Hora: "+curso.getString("hora"));
+        this.comboSeleccionarCurso.setEnabled(false);
+        this.txtIndice.setValue(Integer.valueOf(unidad.getString("indice")));
+        this.txtNombre.setText(unidad.getString("nombre"));
+        this.txtDescripcion.setText(unidad.getString("descripcion"));
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -195,16 +245,26 @@ public class DlgAgregarUnidad extends javax.swing.JDialog {
        if(validarCampos())
        {
            Document unidadNueva = new Document();
-           unidadNueva.append("curso", extraerCurso());
            unidadNueva.append("indice", txtIndice.getValue().toString());
            unidadNueva.append("nombre", txtNombre.getText());
            unidadNueva.append("descripcion", txtDescripcion.getText());
-           if(unidadesRepository.agregarDoumento(unidadNueva))
+           if(botonAgregar.getText().equals("Agregar"))
            {
-               JOptionPane.showMessageDialog(this, "La unidad de competencia se agrego correctamente!", "Mensaje Aviso", JOptionPane.INFORMATION_MESSAGE);
+                unidadNueva.append("curso", extraerCurso());
+                if(unidadesRepository.agregarDoumento(unidadNueva))
+                {
+                    JOptionPane.showMessageDialog(this, "La unidad de competencia se agrego correctamente!", "Mensaje Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    dispose();
+                }
+                else{JOptionPane.showMessageDialog(this, "Error \n Hubo un error al agregar la unidad!","Mensaje Error", JOptionPane.ERROR_MESSAGE);}
+            }
+           else if(botonAgregar.getText().equals("Actualizar"))
+           {
+               unidadesRepository.actualizarUnidad(unidad, unidadNueva);
+               asistenciaCursosRepository.actualizarUnidad(unidad, unidadNueva);
+               JOptionPane.showMessageDialog(this, "La unidad de competencia se actualizo correctamente!", "Mensaje Aviso", JOptionPane.INFORMATION_MESSAGE);
                dispose();
            }
-           else{JOptionPane.showMessageDialog(this, "Error \n Hubo un error al agregar la unidad!","Mensaje Error", JOptionPane.ERROR_MESSAGE);}
        }
     }//GEN-LAST:event_botonAgregarActionPerformed
 
@@ -217,8 +277,16 @@ public class DlgAgregarUnidad extends javax.swing.JDialog {
         }
         else if(unidadesRepository.buscarUnidad(extraerCurso(), txtIndice.getValue().toString())!=null)
         {
-            JOptionPane.showMessageDialog(this, "Error \n Este indice ya fue registrado en este curso!", "Mensaje Error", JOptionPane.ERROR_MESSAGE);
-            return false;
+           if(botonAgregar.getText().equals("Actualizar") && Objects.equals(Integer.valueOf(unidad.getString("indice")), Integer.valueOf(txtIndice.getValue().toString())))
+           { 
+           }
+           else
+           {
+               JOptionPane.showMessageDialog(this, "Error \n Este indice ya fue registrado en este curso!", "Mensaje Error", JOptionPane.ERROR_MESSAGE);
+               return false;
+           }
+            
+           
         }
         else if(txtNombre.getText().isEmpty())
         {
