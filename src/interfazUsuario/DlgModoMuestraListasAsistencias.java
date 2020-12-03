@@ -57,6 +57,9 @@ public class DlgModoMuestraListasAsistencias extends javax.swing.JDialog {
         cajaPorAlumno = new javax.swing.JPanel();
         etiquetaPorAlumno = new javax.swing.JLabel();
         botonPorAlumno = new javax.swing.JButton();
+        cajaPorAlumno3 = new javax.swing.JPanel();
+        etiquetaPorAlumno2 = new javax.swing.JLabel();
+        botonPorAlumno2 = new javax.swing.JButton();
         cajaSalir = new javax.swing.JPanel();
         botonSalir = new javax.swing.JButton();
 
@@ -80,7 +83,7 @@ public class DlgModoMuestraListasAsistencias extends javax.swing.JDialog {
 
         botonPorFecha.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         botonPorFecha.setForeground(new java.awt.Color(255, 255, 255));
-        botonPorFecha.setText("Por fecha");
+        botonPorFecha.setText("Asistencias por fecha");
         botonPorFecha.setContentAreaFilled(false);
         botonPorFecha.setPreferredSize(new java.awt.Dimension(225, 80));
         botonPorFecha.addActionListener(new java.awt.event.ActionListener() {
@@ -96,7 +99,7 @@ public class DlgModoMuestraListasAsistencias extends javax.swing.JDialog {
             .addGroup(cajaPorFechaLayout.createSequentialGroup()
                 .addComponent(etiquetaPorFecha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botonPorFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(botonPorFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE))
         );
         cajaPorFechaLayout.setVerticalGroup(
             cajaPorFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +121,7 @@ public class DlgModoMuestraListasAsistencias extends javax.swing.JDialog {
 
         botonPorUnidad.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         botonPorUnidad.setForeground(new java.awt.Color(255, 255, 255));
-        botonPorUnidad.setText("Por unidad");
+        botonPorUnidad.setText("Asistencias por unidad");
         botonPorUnidad.setContentAreaFilled(false);
         botonPorUnidad.setPreferredSize(new java.awt.Dimension(225, 80));
         botonPorUnidad.addActionListener(new java.awt.event.ActionListener() {
@@ -156,7 +159,7 @@ public class DlgModoMuestraListasAsistencias extends javax.swing.JDialog {
 
         botonPorCurso.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         botonPorCurso.setForeground(new java.awt.Color(255, 255, 255));
-        botonPorCurso.setText("Por Curso");
+        botonPorCurso.setText("Asistencias por curso");
         botonPorCurso.setContentAreaFilled(false);
         botonPorCurso.setPreferredSize(new java.awt.Dimension(225, 80));
         botonPorCurso.addActionListener(new java.awt.event.ActionListener() {
@@ -194,7 +197,7 @@ public class DlgModoMuestraListasAsistencias extends javax.swing.JDialog {
 
         botonPorAlumno.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         botonPorAlumno.setForeground(new java.awt.Color(255, 255, 255));
-        botonPorAlumno.setText("Por alumno");
+        botonPorAlumno.setText("Asistencias por alumno");
         botonPorAlumno.setContentAreaFilled(false);
         botonPorAlumno.setPreferredSize(new java.awt.Dimension(225, 80));
         botonPorAlumno.addActionListener(new java.awt.event.ActionListener() {
@@ -210,7 +213,7 @@ public class DlgModoMuestraListasAsistencias extends javax.swing.JDialog {
             .addGroup(cajaPorAlumnoLayout.createSequentialGroup()
                 .addComponent(etiquetaPorAlumno)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botonPorAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(botonPorAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         cajaPorAlumnoLayout.setVerticalGroup(
             cajaPorAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,19 +221,53 @@ public class DlgModoMuestraListasAsistencias extends javax.swing.JDialog {
             .addComponent(botonPorAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        cajaSalir.setBackground(new java.awt.Color(0, 0, 0));
-        cajaSalir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        cajaSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+        cajaPorAlumno3.setBackground(new java.awt.Color(255, 102, 102));
+        cajaPorAlumno3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        etiquetaPorAlumno2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/porAlumno_icono2.png"))); // NOI18N
+        etiquetaPorAlumno2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                cajaSalirMousePressed(evt);
+                etiquetaPorAlumno2MousePressed(evt);
             }
         });
+
+        botonPorAlumno2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        botonPorAlumno2.setForeground(new java.awt.Color(255, 255, 255));
+        botonPorAlumno2.setText("Inasistencias por alumno");
+        botonPorAlumno2.setContentAreaFilled(false);
+        botonPorAlumno2.setPreferredSize(new java.awt.Dimension(225, 80));
+        botonPorAlumno2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonPorAlumno2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout cajaPorAlumno3Layout = new javax.swing.GroupLayout(cajaPorAlumno3);
+        cajaPorAlumno3.setLayout(cajaPorAlumno3Layout);
+        cajaPorAlumno3Layout.setHorizontalGroup(
+            cajaPorAlumno3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cajaPorAlumno3Layout.createSequentialGroup()
+                .addComponent(etiquetaPorAlumno2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonPorAlumno2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        cajaPorAlumno3Layout.setVerticalGroup(
+            cajaPorAlumno3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(etiquetaPorAlumno2)
+            .addComponent(botonPorAlumno2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        cajaSalir.setBackground(new java.awt.Color(0, 0, 0));
+        cajaSalir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        cajaSalir.setPreferredSize(new java.awt.Dimension(90, 30));
+        cajaSalir.setRequestFocusEnabled(false);
 
         botonSalir.setBackground(new java.awt.Color(255, 255, 255));
         botonSalir.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         botonSalir.setForeground(new java.awt.Color(255, 255, 255));
         botonSalir.setText("Salir");
         botonSalir.setContentAreaFilled(false);
+        botonSalir.setPreferredSize(new java.awt.Dimension(90, 30));
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSalirActionPerformed(evt);
@@ -242,13 +279,12 @@ public class DlgModoMuestraListasAsistencias extends javax.swing.JDialog {
         cajaSalirLayout.setHorizontalGroup(
             cajaSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cajaSalirLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(botonSalir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         cajaSalirLayout.setVerticalGroup(
             cajaSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(botonSalir)
+            .addComponent(botonSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
@@ -256,46 +292,51 @@ public class DlgModoMuestraListasAsistencias extends javax.swing.JDialog {
         panelFondoLayout.setHorizontalGroup(
             panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFondoLayout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cajaPorCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(etiqueteTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cajaPorFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cajaPorUnidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(cajaSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cajaPorAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelFondoLayout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cajaSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cajaPorFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cajaPorUnidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cajaPorCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cajaPorAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cajaPorAlumno3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(panelFondoLayout.createSequentialGroup()
+                        .addGap(143, 143, 143)
+                        .addComponent(etiqueteTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(100, Short.MAX_VALUE))
         );
         panelFondoLayout.setVerticalGroup(
             panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFondoLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(35, 35, 35)
                 .addComponent(etiqueteTitulo)
-                .addGap(44, 44, 44)
-                .addComponent(cajaPorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(cajaPorUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(cajaPorCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(cajaPorAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
+                .addComponent(cajaPorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(cajaPorUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(cajaPorCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(cajaPorAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(cajaPorAlumno3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addComponent(cajaSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -315,10 +356,6 @@ public class DlgModoMuestraListasAsistencias extends javax.swing.JDialog {
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
-
-    private void cajaSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cajaSalirMousePressed
-        dispose();
-    }//GEN-LAST:event_cajaSalirMousePressed
 
     private void botonPorUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPorUnidadActionPerformed
         dispose();
@@ -350,19 +387,32 @@ public class DlgModoMuestraListasAsistencias extends javax.swing.JDialog {
         DlgMostrarListaAsistenciasPorAlumno mostrarListaAsistencias = new DlgMostrarListaAsistenciasPorAlumno(parent, rootPaneCheckingEnabled, cursosRepository, unidadRepository, asistenciaCursosRepository);
     }//GEN-LAST:event_etiquetaPorAlumnoMousePressed
 
+    private void etiquetaPorAlumno2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_etiquetaPorAlumno2MousePressed
+        dispose();
+        
+    }//GEN-LAST:event_etiquetaPorAlumno2MousePressed
+
+    private void botonPorAlumno2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPorAlumno2ActionPerformed
+        dispose();
+        DlgMostrarInasistenciasPorAlumno mostrarListaInasistencias = new DlgMostrarInasistenciasPorAlumno(parent, rootPaneCheckingEnabled,asistenciaCursosRepository);
+    }//GEN-LAST:event_botonPorAlumno2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonPorAlumno;
+    private javax.swing.JButton botonPorAlumno2;
     private javax.swing.JButton botonPorCurso;
     private javax.swing.JButton botonPorFecha;
     private javax.swing.JButton botonPorUnidad;
     private javax.swing.JButton botonSalir;
     private javax.swing.JPanel cajaPorAlumno;
+    private javax.swing.JPanel cajaPorAlumno3;
     private javax.swing.JPanel cajaPorCurso;
     private javax.swing.JPanel cajaPorFecha;
     private javax.swing.JPanel cajaPorUnidad;
     private javax.swing.JPanel cajaSalir;
     private javax.swing.JLabel etiquetaPorAlumno;
+    private javax.swing.JLabel etiquetaPorAlumno2;
     private javax.swing.JLabel etiquetaPorCurso;
     private javax.swing.JLabel etiquetaPorFecha;
     private javax.swing.JLabel etiquetaPorUnidad;

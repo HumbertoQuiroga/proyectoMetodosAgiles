@@ -26,20 +26,25 @@ public class CursosRepository extends BaseRepository{
         return null;
     }
     
-    public boolean actualizarCurso(Document cursoAntiguo, Document cursoNuevo) {
-        
-        try {
+    public boolean actualizarCurso(Document cursoAntiguo, Document cursoNuevo) 
+    {
+        try 
+        {
             Bson valorCursoAcualizado = new Document(cursoNuevo);
             Bson operacionActualizar = new Document("$set",valorCursoAcualizado);
             database.getCollection(collectionName).updateOne(cursoAntiguo, operacionActualizar);
             return true;
-        } catch (Exception e) {
-            System.out.println("Error al actualizar documento en: " + this.collectionName);
-            System.err.println(e.getMessage());
-            return false;
-        }
+        }catch (Exception e){return false;}
     }
     
+    public boolean eliminarCurso(Document curso)
+    {
+        try 
+        {
+            database.getCollection(collectionName).findOneAndDelete(curso);
+            return true;
+        }catch (Exception e){return false;}
+    }
     
     
 }

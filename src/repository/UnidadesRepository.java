@@ -76,5 +76,35 @@ public class UnidadesRepository extends BaseRepository{
             return false;
         }
     }
+    public boolean eliminarUnidad(Document unidad)
+    {
+        try 
+        {
+            database.getCollection(collectionName).findOneAndDelete(unidad);
+            return true;
+        }catch (Exception e){return false;}
+    }
+    
+    public boolean eliminarUnidadesEnElCurso(Document curso)
+    {
+        Document cursoAeliminar = new Document();
+        cursoAeliminar.append("nombre", curso.getString("nombre"));
+        cursoAeliminar.append("periodo", curso.getString("periodo"));
+        cursoAeliminar.append("dias", curso.getString("dias"));
+        cursoAeliminar.append("hora", curso.getString("hora"));
+        
+        List<Document> listaUnidadesCurso = new ArrayList<>();
+        database.getCollection(collectionName).find(new Document("curso", cursoAeliminar)).into(listaUnidadesCurso);
+        
+        if(!listaUnidadesCurso.isEmpty())
+        {
+            for(int cont = 0; cont < listaUnidadesCurso.size() ;cont++)
+            {
+                database.getCollection(collectionName).findOneAndDelete(listaUnidadesCurso.get(cont));
+            }
+            return true;
+        }
+        return false;
+    }
     
 }

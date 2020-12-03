@@ -65,7 +65,9 @@ public class DlgAlumnoLista extends javax.swing.JDialog
         comboEstadoAsistencia = new javax.swing.JComboBox<>();
         txtHora = new javax.swing.JFormattedTextField();
         txtMinutosTotales = new javax.swing.JSpinner();
+        panelBotonAceptar = new javax.swing.JPanel();
         botonAceptar = new javax.swing.JButton();
+        panelBotonSalir = new javax.swing.JPanel();
         botonSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -111,30 +113,70 @@ public class DlgAlumnoLista extends javax.swing.JDialog
         txtMinutosTotales.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         txtMinutosTotales.setPreferredSize(new java.awt.Dimension(68, 25));
 
-        botonAceptar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        panelBotonAceptar.setBackground(new java.awt.Color(51, 255, 51));
+        panelBotonAceptar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelBotonAceptar.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        botonAceptar.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        botonAceptar.setForeground(new java.awt.Color(255, 255, 255));
         botonAceptar.setText("Actualizar");
+        botonAceptar.setContentAreaFilled(false);
+        botonAceptar.setPreferredSize(new java.awt.Dimension(100, 30));
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAceptarActionPerformed(evt);
             }
         });
 
-        botonSalir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        javax.swing.GroupLayout panelBotonAceptarLayout = new javax.swing.GroupLayout(panelBotonAceptar);
+        panelBotonAceptar.setLayout(panelBotonAceptarLayout);
+        panelBotonAceptarLayout.setHorizontalGroup(
+            panelBotonAceptarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonAceptarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        panelBotonAceptarLayout.setVerticalGroup(
+            panelBotonAceptarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBotonAceptarLayout.createSequentialGroup()
+                .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        panelBotonSalir.setBackground(new java.awt.Color(0, 0, 0));
+        panelBotonSalir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelBotonSalir.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        botonSalir.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        botonSalir.setForeground(new java.awt.Color(255, 255, 255));
         botonSalir.setText("Cancelar");
+        botonSalir.setContentAreaFilled(false);
+        botonSalir.setPreferredSize(new java.awt.Dimension(100, 30));
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSalirActionPerformed(evt);
             }
         });
 
+        javax.swing.GroupLayout panelBotonSalirLayout = new javax.swing.GroupLayout(panelBotonSalir);
+        panelBotonSalir.setLayout(panelBotonSalirLayout);
+        panelBotonSalirLayout.setHorizontalGroup(
+            panelBotonSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonSalirLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        panelBotonSalirLayout.setVerticalGroup(
+            panelBotonSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonSalirLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
         panelFondo.setLayout(panelFondoLayout);
         panelFondoLayout.setHorizontalGroup(
             panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(etiquetaTitulo)
-                .addGap(100, 100, 100))
             .addGroup(panelFondoLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -148,13 +190,17 @@ public class DlgAlumnoLista extends javax.swing.JDialog
                         .addComponent(txtMinutosTotales, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtHora, javax.swing.GroupLayout.Alignment.LEADING))
                     .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(panelFondoLayout.createSequentialGroup()
-                            .addComponent(botonAceptar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonSalir))
                         .addComponent(txtNombreCompleto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(comboEstadoAsistencia, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(comboEstadoAsistencia, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelFondoLayout.createSequentialGroup()
+                            .addComponent(panelBotonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelBotonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(74, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(etiquetaTitulo)
+                .addGap(100, 100, 100))
         );
         panelFondoLayout.setVerticalGroup(
             panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,11 +223,14 @@ public class DlgAlumnoLista extends javax.swing.JDialog
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etiquetaMinutosTotales)
                     .addComponent(txtMinutosTotales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonAceptar)
-                    .addComponent(botonSalir))
-                .addGap(24, 24, 24))
+                .addGap(26, 26, 26)
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelFondoLayout.createSequentialGroup()
+                        .addComponent(panelBotonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(90, Short.MAX_VALUE))
+                    .addGroup(panelFondoLayout.createSequentialGroup()
+                        .addComponent(panelBotonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -311,6 +360,8 @@ public class DlgAlumnoLista extends javax.swing.JDialog
     private javax.swing.JLabel etiquetaMinutosTotales;
     private javax.swing.JLabel etiquetaNombreCompleto;
     private javax.swing.JLabel etiquetaTitulo;
+    private javax.swing.JPanel panelBotonAceptar;
+    private javax.swing.JPanel panelBotonSalir;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JFormattedTextField txtHora;
     private javax.swing.JSpinner txtMinutosTotales;

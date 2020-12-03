@@ -111,5 +111,52 @@ public class AsistenciaCursosRepository extends BaseRepository{
         else{return listaUnidadesEncontrada;}
     }
     
+    public boolean eliminarAsistenciasEnElCurso(Document curso)
+    {
+        Document cursoAeliminar = new Document();
+        cursoAeliminar.append("nombre", curso.getString("nombre"));
+        cursoAeliminar.append("periodo", curso.getString("periodo"));
+        cursoAeliminar.append("dias", curso.getString("dias"));
+        cursoAeliminar.append("hora", curso.getString("hora"));
+        
+        List<Document> listaAsistenciaCurso = new ArrayList<>();
+        database.getCollection(collectionName).find(new Document("curso", cursoAeliminar)).into(listaAsistenciaCurso);
+        
+        if(!listaAsistenciaCurso.isEmpty())
+        {
+            for(int cont = 0; cont < listaAsistenciaCurso.size() ;cont++)
+            {
+                database.getCollection(collectionName).findOneAndDelete(listaAsistenciaCurso.get(cont));
+            }
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean eliminarAsistenciasEnLaUnidad(Document unidad)
+    {
+        Document unidadAeliminar = new Document();
+        unidadAeliminar.append("indice", unidad.getString("indice"));
+        unidadAeliminar.append("nombre", unidad.getString("nombre"));
+        unidadAeliminar.append("descripcion", unidad.getString("descripcion"));
+        
+        Document listasBuscadas = new Document();
+        listasBuscadas.append("curso", unidad.get("curso"));
+        listasBuscadas.append("unidad", unidadAeliminar);
+       
+        List<Document> listaAsistenciaCursoyUnidad = new ArrayList<>();
+        database.getCollection(collectionName).find(listasBuscadas).into(listaAsistenciaCursoyUnidad);
+        
+        if(!listaAsistenciaCursoyUnidad.isEmpty())
+        {
+            for(int cont = 0; cont < listaAsistenciaCursoyUnidad.size() ;cont++)
+            {
+                database.getCollection(collectionName).findOneAndDelete(listaAsistenciaCursoyUnidad.get(cont));
+            }
+            return true;
+        }
+        return false;
+    }
+    
     
 }

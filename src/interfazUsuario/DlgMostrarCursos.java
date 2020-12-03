@@ -5,7 +5,9 @@
  */
 package interfazUsuario;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import org.bson.Document;
 import repository.AsistenciaCursosRepository;
 import repository.CursosRepository;
@@ -35,8 +37,7 @@ public class DlgMostrarCursos extends javax.swing.JDialog
         this.cursosRepo = cursosRepo;
         this.listaCursos = new ArrayList<>();
         this.actualizarTablaCursos();
-        if(accion == ConstantesGUI.MODIFICAR){configurarParaModificar();}
-        else{this.setTitle("Mostrar Cursos");}
+        this.setTitle("Mostrar Cursos");
         this.setVisible(true);
     }
 
@@ -59,8 +60,7 @@ public class DlgMostrarCursos extends javax.swing.JDialog
         this.asistenciaCursosRepository = asistenciaCursosRepository;
         this.listaCursos = new ArrayList<>();
         this.actualizarTablaCursos();
-        if(accion == ConstantesGUI.MODIFICAR){configurarParaModificar();}
-        else{this.setTitle("Mostrar Cursos");}
+        this.configurarParaModificar();
         this.setVisible(true);
     }
     
@@ -77,9 +77,12 @@ public class DlgMostrarCursos extends javax.swing.JDialog
         ScrollPanelTabla = new javax.swing.JScrollPane();
         tablaCursos = new javax.swing.JTable();
         etiquetaTitulo = new javax.swing.JLabel();
-        botonSalir = new javax.swing.JButton();
-        botonModificar = new javax.swing.JButton();
+        panelBotonSalir = new javax.swing.JPanel();
+        botonSalir7 = new javax.swing.JButton();
+        panelBotonEliminar = new javax.swing.JPanel();
         botonEliminar = new javax.swing.JButton();
+        panelBotonModificar = new javax.swing.JPanel();
+        botonModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -112,17 +115,80 @@ public class DlgMostrarCursos extends javax.swing.JDialog
         etiquetaTitulo.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         etiquetaTitulo.setText("Lista de cursos registrados");
 
-        botonSalir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        botonSalir.setText("Salir");
-        botonSalir.addActionListener(new java.awt.event.ActionListener() {
+        panelBotonSalir.setBackground(new java.awt.Color(0, 0, 0));
+        panelBotonSalir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelBotonSalir.setPreferredSize(new java.awt.Dimension(80, 30));
+
+        botonSalir7.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        botonSalir7.setForeground(new java.awt.Color(255, 255, 255));
+        botonSalir7.setText("Salir");
+        botonSalir7.setContentAreaFilled(false);
+        botonSalir7.setPreferredSize(new java.awt.Dimension(80, 30));
+        botonSalir7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSalirActionPerformed(evt);
             }
         });
 
-        botonModificar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        javax.swing.GroupLayout panelBotonSalirLayout = new javax.swing.GroupLayout(panelBotonSalir);
+        panelBotonSalir.setLayout(panelBotonSalirLayout);
+        panelBotonSalirLayout.setHorizontalGroup(
+            panelBotonSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBotonSalirLayout.createSequentialGroup()
+                .addComponent(botonSalir7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panelBotonSalirLayout.setVerticalGroup(
+            panelBotonSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonSalirLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonSalir7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        panelBotonEliminar.setBackground(new java.awt.Color(102, 102, 102));
+        panelBotonEliminar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelBotonEliminar.setPreferredSize(new java.awt.Dimension(90, 30));
+        panelBotonEliminar.setVisible(false);
+
+        botonEliminar.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        botonEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        botonEliminar.setText("Eliminar");
+        botonEliminar.setContentAreaFilled(false);
+        botonEliminar.setEnabled(false);
+        botonEliminar.setPreferredSize(new java.awt.Dimension(90, 30));
+        botonEliminar.setVisible(false);
+        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelBotonEliminarLayout = new javax.swing.GroupLayout(panelBotonEliminar);
+        panelBotonEliminar.setLayout(panelBotonEliminarLayout);
+        panelBotonEliminarLayout.setHorizontalGroup(
+            panelBotonEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBotonEliminarLayout.createSequentialGroup()
+                .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panelBotonEliminarLayout.setVerticalGroup(
+            panelBotonEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBotonEliminarLayout.createSequentialGroup()
+                .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        panelBotonModificar.setBackground(new java.awt.Color(102, 102, 102));
+        panelBotonModificar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelBotonModificar.setPreferredSize(new java.awt.Dimension(90, 30));
+        panelBotonModificar.setVisible(false);
+
+        botonModificar.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        botonModificar.setForeground(new java.awt.Color(255, 255, 255));
         botonModificar.setText("Modificar");
+        botonModificar.setContentAreaFilled(false);
         botonModificar.setEnabled(false);
+        botonModificar.setPreferredSize(new java.awt.Dimension(90, 30));
         botonModificar.setVisible(false);
         botonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,10 +196,20 @@ public class DlgMostrarCursos extends javax.swing.JDialog
             }
         });
 
-        botonEliminar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        botonEliminar.setText("Eliminar");
-        botonEliminar.setEnabled(false);
-        botonEliminar.setVisible(false);
+        javax.swing.GroupLayout panelBotonModificarLayout = new javax.swing.GroupLayout(panelBotonModificar);
+        panelBotonModificar.setLayout(panelBotonModificarLayout);
+        panelBotonModificarLayout.setHorizontalGroup(
+            panelBotonModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonModificarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        panelBotonModificarLayout.setVerticalGroup(
+            panelBotonModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBotonModificarLayout.createSequentialGroup()
+                .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
         panelFondo.setLayout(panelFondoLayout);
@@ -142,31 +218,31 @@ public class DlgMostrarCursos extends javax.swing.JDialog
             .addGroup(panelFondoLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelFondoLayout.createSequentialGroup()
+                        .addComponent(panelBotonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(panelBotonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelBotonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(ScrollPanelTabla)
                     .addGroup(panelFondoLayout.createSequentialGroup()
                         .addComponent(etiquetaTitulo)
-                        .addGap(0, 294, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondoLayout.createSequentialGroup()
-                        .addComponent(botonModificar)
-                        .addGap(45, 45, 45)
-                        .addComponent(botonEliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botonSalir)))
+                        .addGap(0, 294, Short.MAX_VALUE)))
                 .addGap(25, 25, 25))
         );
         panelFondoLayout.setVerticalGroup(
             panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFondoLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(23, 23, 23)
                 .addComponent(etiquetaTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(ScrollPanelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonSalir)
-                    .addComponent(botonModificar)
-                    .addComponent(botonEliminar))
-                .addGap(20, 20, 20))
+                .addGap(20, 20, 20)
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelBotonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelBotonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelBotonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -177,7 +253,7 @@ public class DlgMostrarCursos extends javax.swing.JDialog
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
+            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
         );
 
         pack();
@@ -187,34 +263,62 @@ public class DlgMostrarCursos extends javax.swing.JDialog
      private void configurarParaModificar()
      {
         this.setTitle("Menu modificar cursos");
+        this.panelBotonEliminar.setVisible(true);
         this.botonModificar.setVisible(true);
+        this.panelBotonModificar.setVisible(true);
         this.botonEliminar.setVisible(true);
      }
      
-    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        dispose();
-    }//GEN-LAST:event_botonSalirActionPerformed
-
     private void tablaCursosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCursosMousePressed
        if(tablaCursos.getSelectedRow() != -1)
        {
+           panelBotonModificar.setBackground(new Color(51,255,51));
            botonModificar.setEnabled(true);
+           panelBotonEliminar.setBackground(new Color(255,0,0));
+           botonEliminar.setEnabled(true);
        }
     }//GEN-LAST:event_tablaCursosMousePressed
 
     private void panelFondoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelFondoMousePressed
-       if(tablaCursos.getSelectedRow() != -1)
-       {
+           panelBotonModificar.setBackground(new Color(102,102,102));
            botonModificar.setEnabled(false);
+           panelBotonEliminar.setBackground(new Color(102,102,102));
+           botonEliminar.setEnabled(false);
            tablaCursos.clearSelection();
-       }
     }//GEN-LAST:event_panelFondoMousePressed
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
        DlgAgregarCurso modificarCurso = new DlgAgregarCurso(null, rootPaneCheckingEnabled, cursosRepo, asistenciaCursosRepository, unidadesRepository ,listaCursos.get(tablaCursos.getSelectedRow()));
        actualizarTablaCursos();
-       botonModificar.setEnabled(false);
+           panelBotonModificar.setBackground(new Color(102,102,102));
+           botonModificar.setEnabled(false);
+           panelBotonEliminar.setBackground(new Color(102,102,102));
+           botonEliminar.setEnabled(false);
+           tablaCursos.clearSelection();
     }//GEN-LAST:event_botonModificarActionPerformed
+
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
+       Document curso = listaCursos.get(tablaCursos.getSelectedRow());
+       int respuesta = JOptionPane.showConfirmDialog(this, "Si elimina el curso con el "+"Nombre: "+curso.getString("nombre")+", Periodo: "+curso.getString("periodo")+", Dias: "+curso.getString("dias")+", Hora: "+curso.getString("hora")+
+       "\n ademas del curso se eliminaran las unidades de competencias y las asistencias registradas en el curso\n ¿Esta seguro de eliminar el curso?", "Mensaje Confirmacion", JOptionPane.YES_NO_OPTION);
+       if(respuesta == 0)
+       {
+           cursosRepo.eliminarCurso(curso);
+           unidadesRepository.eliminarUnidadesEnElCurso(curso);
+           asistenciaCursosRepository.eliminarAsistenciasEnElCurso(curso);
+           actualizarTablaCursos();
+           JOptionPane.showMessageDialog(this, "El curso se elimino correctamente", "Mensaje Aviso", JOptionPane.INFORMATION_MESSAGE);
+       }
+           panelBotonModificar.setBackground(new Color(102,102,102));
+           botonModificar.setEnabled(false);
+           panelBotonEliminar.setBackground(new Color(102,102,102));
+           botonEliminar.setEnabled(false);
+           tablaCursos.clearSelection();
+    }//GEN-LAST:event_botonEliminarActionPerformed
+
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_botonSalirActionPerformed
 
     private void actualizarTablaCursos()
     {
@@ -266,7 +370,24 @@ public class DlgMostrarCursos extends javax.swing.JDialog
     private javax.swing.JButton botonEliminar;
     private javax.swing.JButton botonModificar;
     private javax.swing.JButton botonSalir;
+    private javax.swing.JButton botonSalir1;
+    private javax.swing.JButton botonSalir2;
+    private javax.swing.JButton botonSalir3;
+    private javax.swing.JButton botonSalir4;
+    private javax.swing.JButton botonSalir5;
+    private javax.swing.JButton botonSalir6;
+    private javax.swing.JButton botonSalir7;
+    private javax.swing.JPanel cajaSalir;
+    private javax.swing.JPanel cajaSalir1;
+    private javax.swing.JPanel cajaSalir2;
+    private javax.swing.JPanel cajaSalir3;
+    private javax.swing.JPanel cajaSalir4;
+    private javax.swing.JPanel cajaSalir5;
+    private javax.swing.JPanel cajaSalir6;
     private javax.swing.JLabel etiquetaTitulo;
+    private javax.swing.JPanel panelBotonEliminar;
+    private javax.swing.JPanel panelBotonModificar;
+    private javax.swing.JPanel panelBotonSalir;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JTable tablaCursos;
     // End of variables declaration//GEN-END:variables

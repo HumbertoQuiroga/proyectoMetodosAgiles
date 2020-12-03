@@ -80,7 +80,6 @@ public class DlgAgregarCurso extends javax.swing.JDialog
         etiquetaHora = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtHora = new javax.swing.JFormattedTextField();
-        botonAgregarCurso = new javax.swing.JButton();
         comboPeriodo = new javax.swing.JComboBox<>();
         checkLunes = new javax.swing.JCheckBox();
         checkMartes = new javax.swing.JCheckBox();
@@ -90,6 +89,9 @@ public class DlgAgregarCurso extends javax.swing.JDialog
         checkSabado = new javax.swing.JCheckBox();
         checkDomingo = new javax.swing.JCheckBox();
         txtDias = new javax.swing.JTextField();
+        panelBotonAgregar = new javax.swing.JPanel();
+        botonAgregarCurso = new javax.swing.JButton();
+        panelBotonCancelar = new javax.swing.JPanel();
         botonCanelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -120,14 +122,6 @@ public class DlgAgregarCurso extends javax.swing.JDialog
             ex.printStackTrace();
         }
         txtHora.setText("");
-
-        botonAgregarCurso.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        botonAgregarCurso.setText("Agregar");
-        botonAgregarCurso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAgregarCursoActionPerformed(evt);
-            }
-        });
 
         comboPeriodo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         comboPeriodo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AgoDic20", "EneMay21", "AgoDic21" }));
@@ -198,13 +192,65 @@ public class DlgAgregarCurso extends javax.swing.JDialog
         txtDias.setEditable(false);
         txtDias.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        botonCanelar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        panelBotonAgregar.setBackground(new java.awt.Color(51, 255, 51));
+        panelBotonAgregar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelBotonAgregar.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        botonAgregarCurso.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        botonAgregarCurso.setForeground(new java.awt.Color(255, 255, 255));
+        botonAgregarCurso.setText("Agregar");
+        botonAgregarCurso.setContentAreaFilled(false);
+        botonAgregarCurso.setPreferredSize(new java.awt.Dimension(100, 30));
+        botonAgregarCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAgregarCursoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelBotonAgregarLayout = new javax.swing.GroupLayout(panelBotonAgregar);
+        panelBotonAgregar.setLayout(panelBotonAgregarLayout);
+        panelBotonAgregarLayout.setHorizontalGroup(
+            panelBotonAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonAgregarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonAgregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        panelBotonAgregarLayout.setVerticalGroup(
+            panelBotonAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBotonAgregarLayout.createSequentialGroup()
+                .addComponent(botonAgregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        panelBotonCancelar.setBackground(new java.awt.Color(0, 0, 0));
+        panelBotonCancelar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelBotonCancelar.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        botonCanelar.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        botonCanelar.setForeground(new java.awt.Color(255, 255, 255));
         botonCanelar.setText("Cancelar");
+        botonCanelar.setContentAreaFilled(false);
+        botonCanelar.setPreferredSize(new java.awt.Dimension(100, 30));
         botonCanelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCanelarActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout panelBotonCancelarLayout = new javax.swing.GroupLayout(panelBotonCancelar);
+        panelBotonCancelar.setLayout(panelBotonCancelarLayout);
+        panelBotonCancelarLayout.setHorizontalGroup(
+            panelBotonCancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBotonCancelarLayout.createSequentialGroup()
+                .addComponent(botonCanelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panelBotonCancelarLayout.setVerticalGroup(
+            panelBotonCancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBotonCancelarLayout.createSequentialGroup()
+                .addComponent(botonCanelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
         panelFondo.setLayout(panelFondoLayout);
@@ -229,9 +275,6 @@ public class DlgAgregarCurso extends javax.swing.JDialog
                             .addGroup(panelFondoLayout.createSequentialGroup()
                                 .addGap(40, 40, 40)
                                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondoLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(botonCanelar))
                                     .addGroup(panelFondoLayout.createSequentialGroup()
                                         .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(checkMartes)
@@ -245,17 +288,18 @@ public class DlgAgregarCurso extends javax.swing.JDialog
                                             .addComponent(checkJueves)
                                             .addComponent(checkViernes)
                                             .addComponent(checkMiercoles))
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondoLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(panelBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(panelFondoLayout.createSequentialGroup()
                                 .addComponent(etiquetaHora)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panelFondoLayout.createSequentialGroup()
-                                        .addComponent(botonAgregarCurso)
+                                        .addComponent(panelBotonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(panelFondoLayout.createSequentialGroup()
-                                        .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(127, 127, 127))))))
+                                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(etiquetaTitulo))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
@@ -292,15 +336,19 @@ public class DlgAgregarCurso extends javax.swing.JDialog
                 .addComponent(checkJueves)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(checkViernes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(etiquetaHora)
-                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonAgregarCurso)
-                    .addComponent(botonCanelar))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelFondoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(etiquetaHora)
+                            .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addComponent(panelBotonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(45, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -315,7 +363,7 @@ public class DlgAgregarCurso extends javax.swing.JDialog
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 5, Short.MAX_VALUE))
         );
 
         pack();
@@ -561,6 +609,8 @@ public class DlgAgregarCurso extends javax.swing.JDialog
     private javax.swing.JLabel etiquetaNombre;
     private javax.swing.JLabel etiquetaPeriodo;
     private javax.swing.JLabel etiquetaTitulo;
+    private javax.swing.JPanel panelBotonAgregar;
+    private javax.swing.JPanel panelBotonCancelar;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JTextField txtDias;
     private javax.swing.JFormattedTextField txtHora;

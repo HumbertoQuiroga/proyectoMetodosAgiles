@@ -60,6 +60,7 @@ public class DlgMostrarListasAsistenciasPorUnidad extends javax.swing.JDialog {
         tablaLista = new javax.swing.JTable();
         etiquetaSeleccionarCurso = new javax.swing.JLabel();
         etiquetaSeleccionarUnidad = new javax.swing.JLabel();
+        panelBotonSalir = new javax.swing.JPanel();
         botonSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -108,13 +109,36 @@ public class DlgMostrarListasAsistenciasPorUnidad extends javax.swing.JDialog {
         etiquetaSeleccionarUnidad.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         etiquetaSeleccionarUnidad.setText("Seleccionar unidad: ");
 
+        panelBotonSalir.setBackground(new java.awt.Color(0, 0, 0));
+        panelBotonSalir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelBotonSalir.setPreferredSize(new java.awt.Dimension(90, 30));
+        panelBotonSalir.setRequestFocusEnabled(false);
+
         botonSalir.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        botonSalir.setForeground(new java.awt.Color(255, 255, 255));
         botonSalir.setText("Salir");
+        botonSalir.setContentAreaFilled(false);
+        botonSalir.setPreferredSize(new java.awt.Dimension(90, 30));
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSalirActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout panelBotonSalirLayout = new javax.swing.GroupLayout(panelBotonSalir);
+        panelBotonSalir.setLayout(panelBotonSalirLayout);
+        panelBotonSalirLayout.setHorizontalGroup(
+            panelBotonSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonSalirLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        panelBotonSalirLayout.setVerticalGroup(
+            panelBotonSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonSalirLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
         panelFondo.setLayout(panelFondoLayout);
@@ -123,7 +147,6 @@ public class DlgMostrarListasAsistenciasPorUnidad extends javax.swing.JDialog {
             .addGroup(panelFondoLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(botonSalir)
                     .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(etiquetaTitulo)
                         .addComponent(scrollPanelTablaLista, javax.swing.GroupLayout.PREFERRED_SIZE, 828, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,7 +158,8 @@ public class DlgMostrarListasAsistenciasPorUnidad extends javax.swing.JDialog {
                             .addGroup(panelFondoLayout.createSequentialGroup()
                                 .addComponent(etiquetaSeleccionarUnidad)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboBoxUnidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(comboBoxUnidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(panelBotonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         panelFondoLayout.setVerticalGroup(
@@ -154,8 +178,8 @@ public class DlgMostrarListasAsistenciasPorUnidad extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(scrollPanelTablaLista, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(botonSalir)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addComponent(panelBotonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -166,7 +190,7 @@ public class DlgMostrarListasAsistenciasPorUnidad extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
         );
 
         pack();
@@ -261,6 +285,8 @@ public class DlgMostrarListasAsistenciasPorUnidad extends javax.swing.JDialog {
                 }
                 else
                 {
+                  if(listaConListaDeAsistencias.get(cont).get(cont2).getString("estadoAsistencia").equals("Asistio"))
+                  {  
                     if(comprobarSiYaExisteElEstudiante(listaAsistencia, alumno)==false)
                     {
                         if(listaConListaDeAsistencias.get(cont).get(cont2).getString("estadoAsistencia").equals("Asistio"))
@@ -274,6 +300,7 @@ public class DlgMostrarListasAsistenciasPorUnidad extends javax.swing.JDialog {
                             listaAsistencia.add(alumno);
                         }
                     }
+                  }
                 }
             }
         }
@@ -434,6 +461,7 @@ public class DlgMostrarListasAsistenciasPorUnidad extends javax.swing.JDialog {
     private javax.swing.JLabel etiquetaSeleccionarCurso;
     private javax.swing.JLabel etiquetaSeleccionarUnidad;
     private javax.swing.JLabel etiquetaTitulo;
+    private javax.swing.JPanel panelBotonSalir;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JScrollPane scrollPanelTablaLista;
     private javax.swing.JTable tablaLista;

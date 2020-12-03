@@ -108,7 +108,9 @@ public class DlgAgregarUnidad extends javax.swing.JDialog {
         txtNombre = new javax.swing.JTextField();
         scarollDescripcion = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
+        panelBotonAgregar = new javax.swing.JPanel();
         botonAgregar = new javax.swing.JButton();
+        panelBotonCancelar = new javax.swing.JPanel();
         botonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -148,21 +150,65 @@ public class DlgAgregarUnidad extends javax.swing.JDialog {
         txtDescripcion.setPreferredSize(new java.awt.Dimension(290, 90));
         scarollDescripcion.setViewportView(txtDescripcion);
 
+        panelBotonAgregar.setBackground(new java.awt.Color(51, 255, 51));
+        panelBotonAgregar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelBotonAgregar.setPreferredSize(new java.awt.Dimension(100, 30));
+
         botonAgregar.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        botonAgregar.setForeground(new java.awt.Color(255, 255, 255));
         botonAgregar.setText("Agregar");
+        botonAgregar.setContentAreaFilled(false);
+        botonAgregar.setPreferredSize(new java.awt.Dimension(100, 30));
         botonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAgregarActionPerformed(evt);
             }
         });
 
+        javax.swing.GroupLayout panelBotonAgregarLayout = new javax.swing.GroupLayout(panelBotonAgregar);
+        panelBotonAgregar.setLayout(panelBotonAgregarLayout);
+        panelBotonAgregarLayout.setHorizontalGroup(
+            panelBotonAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBotonAgregarLayout.createSequentialGroup()
+                .addComponent(botonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panelBotonAgregarLayout.setVerticalGroup(
+            panelBotonAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonAgregarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        panelBotonCancelar.setBackground(new java.awt.Color(0, 0, 0));
+        panelBotonCancelar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelBotonCancelar.setPreferredSize(new java.awt.Dimension(95, 30));
+
         botonCancelar.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        botonCancelar.setForeground(new java.awt.Color(255, 255, 255));
         botonCancelar.setText("Cancelar");
+        botonCancelar.setContentAreaFilled(false);
+        botonCancelar.setPreferredSize(new java.awt.Dimension(95, 30));
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCancelarActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout panelBotonCancelarLayout = new javax.swing.GroupLayout(panelBotonCancelar);
+        panelBotonCancelar.setLayout(panelBotonCancelarLayout);
+        panelBotonCancelarLayout.setHorizontalGroup(
+            panelBotonCancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBotonCancelarLayout.createSequentialGroup()
+                .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panelBotonCancelarLayout.setVerticalGroup(
+            panelBotonCancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBotonCancelarLayout.createSequentialGroup()
+                .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
         panelFondo.setLayout(panelFondoLayout);
@@ -184,9 +230,9 @@ public class DlgAgregarUnidad extends javax.swing.JDialog {
                             .addComponent(txtIndice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(scarollDescripcion)
                             .addGroup(panelFondoLayout.createSequentialGroup()
-                                .addComponent(botonAgregar)
+                                .addComponent(panelBotonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(botonCancelar))
+                                .addComponent(panelBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(comboSeleccionarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(60, Short.MAX_VALUE))
@@ -215,11 +261,11 @@ public class DlgAgregarUnidad extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(etiquetaOpcional))
                     .addComponent(scarollDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonAgregar)
-                    .addComponent(botonCancelar))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelBotonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -329,6 +375,8 @@ public class DlgAgregarUnidad extends javax.swing.JDialog {
     private javax.swing.JLabel etiquetaOpcional;
     private javax.swing.JLabel etiquetaSeleccionarCurso;
     private javax.swing.JLabel etiquetaTitulo;
+    private javax.swing.JPanel panelBotonAgregar;
+    private javax.swing.JPanel panelBotonCancelar;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JScrollPane scarollDescripcion;
     private javax.swing.JTextArea txtDescripcion;
