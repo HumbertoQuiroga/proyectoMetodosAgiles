@@ -249,7 +249,8 @@ public class DlgAlumnoLista extends javax.swing.JDialog
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-       dispose();
+        this.alumno = null;
+        dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed

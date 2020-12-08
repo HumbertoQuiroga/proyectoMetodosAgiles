@@ -5,16 +5,12 @@
             <url>src/interfazUsuario/JFrameMenuPrincipal.java</url>
             <bookmark id="1">
                 <name/>
-                <line>629</line>
+                <line>623</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Alfredo%20Perez/Desktop/ProyectoMetodosAgiles/src/interfazUsuario/DlgMostrarInasistenciasPorAlumno.java</file>
-            <file>file:/C:/Users/Alfredo%20Perez/Desktop/ProyectoMetodosAgiles/src/interfazUsuario/DlgModoMuestraListasAsistencias.java</file>
-            <file>file:/C:/Users/Alfredo%20Perez/Desktop/ProyectoMetodosAgiles/src/interfazUsuario/DlgMostrarListaAsistenciasPorAlumno.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

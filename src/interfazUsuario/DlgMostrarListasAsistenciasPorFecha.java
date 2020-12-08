@@ -365,9 +365,13 @@ public class DlgMostrarListasAsistenciasPorFecha extends javax.swing.JDialog {
         Document curso = extraerCurso();
         if(asistenciaCursosRepository.buscarListaAsistencias(curso, convertirFechaToString())!=null)
         {
-           DlgAlumnoLista agregarAlumno = new DlgAlumnoLista(null, rootPaneCheckingEnabled, listaContenido.get(tablaLista.getSelectedRow()), ConstantesGUI.MODIFICAR);
-           asistenciaCursosRepository.actualizarListaAsistencias(curso, convertirFechaToString() , listaContenido);
-           actualizarTablaLista();
+           Document alumno = listaContenido.get(tablaLista.getSelectedRow());
+           DlgAlumnoLista agregarAlumno = new DlgAlumnoLista(null, rootPaneCheckingEnabled, alumno, ConstantesGUI.MODIFICAR);
+           if(alumno != null)
+           {
+            asistenciaCursosRepository.actualizarListaAsistencias(curso, convertirFechaToString() , listaContenido);
+            actualizarTablaLista();
+           }
         }
        panelBotonModificar.setBackground(new Color(102,102,102));
        botonModificar.setEnabled(false);
@@ -375,6 +379,7 @@ public class DlgMostrarListasAsistenciasPorFecha extends javax.swing.JDialog {
     }//GEN-LAST:event_botonModificarActionPerformed
 
     private void botonNuevoRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoRegistroActionPerformed
+        Document curso = extraerCurso();
         if(comprobarCampos())
         {
             Document estudianteNuevo = new Document();
@@ -382,6 +387,7 @@ public class DlgMostrarListasAsistenciasPorFecha extends javax.swing.JDialog {
             if(!estudianteNuevo.isEmpty())
             {
                 listaContenido.add(estudianteNuevo);
+                asistenciaCursosRepository.actualizarListaAsistencias(curso, convertirFechaToString() , listaContenido);
                 actualizarTablaLista();
             }
         }
@@ -421,6 +427,9 @@ public class DlgMostrarListasAsistenciasPorFecha extends javax.swing.JDialog {
     }//GEN-LAST:event_comboBoxCursosActionPerformed
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
+            panelBotonModificar.setBackground(new Color(102,102,102));
+            botonModificar.setEnabled(false);
+            tablaLista.clearSelection();
             if(comprobarCampos())
             {
                 if(asistenciaCursosRepository.buscarListaAsistencias(extraerCurso(), convertirFechaToString())!=null)
@@ -468,6 +477,7 @@ public class DlgMostrarListasAsistenciasPorFecha extends javax.swing.JDialog {
     }//GEN-LAST:event_panelBotonBuscarMousePressed
 
     private void campoFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_campoFechaPropertyChange
+        if(listaContenido!=null &&!listaContenido.isEmpty()){listaContenido.clear();actualizarTablaLista();}
         panelBotonModificar.setBackground(new Color(102,102,102));
         botonModificar.setEnabled(false);
         panelBotonNuevoRegistro.setBackground(new Color(102,102,102));
